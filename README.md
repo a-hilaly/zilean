@@ -1,13 +1,13 @@
 # Zilean
 Mysql tool kit and backup manager
 
-- [1 - Getting Zilean](#Getting Zilean)
-- [2 - Setup](#Setup)
-- [3 - Documentation](#Documentation)
-- [3.1 - Python3](#Python3)
-- [3.2 - Command Line](#Command Line)
-- [4 - Zilean Decorators](#Zilean Decorators)
-- [5 - Zilean Scripts](#Zilean Scritps)
+- [1 - Getting Zilean](#getting-zilean)
+- [2 - Setup](#setup)
+- [3 - Documentation](#documentation)
+- [3.1 - Python3](#python3)
+- [3.2 - Command Line](#command-line)
+- [4 - Zilean Decorators](#zilean-decorators)
+- [5 - Zilean Scripts](#zilean-scripts)
 
 ## Getting Zilean
 classic git command
