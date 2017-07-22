@@ -1,4 +1,3 @@
-from greww.settings import get_settings
 import pymysql.cursors
 
 
