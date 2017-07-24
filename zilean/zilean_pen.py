@@ -2,7 +2,6 @@ from .zilean_mysql_access import zilean_sql, zilean_fetch_sql
 from .zilean_decorators import op_fails_repoter
 from .zilean_jobs import _get_job as G
 
-
 _SHOW_DATABASES = "SHOW DATABASES;"
 _CREATE_DATA_BASE = "CREATE DATABASE {0};"
 _DELETE_DATA_BASE = "DROP DATABASE {0};"
