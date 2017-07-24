@@ -2,13 +2,17 @@
 Mysql tool kit and backup manager
 
 - [1 - Getting Zilean](#1---getting-zilean)
-- [2 - Setup](#2-setup)
-- [3 - Documentation](#documentation)
-- [3.1 - Setting zilean](#setting-zilean)
-- [3.2 - Python3](#python3)
-- [3.3 - Command Line](#command-line)
-- [4 - Zilean Decorators](#zilean-decorators)
-- [5 - Zilean Scripts](#zilean-scripts)
+- [2 - Setup](#2---setup)
+- [3 - Documentation](#3---documentation)
+- [3.1 - Setting zilean](#3.1---setting-zilean)
+- [3.2 - Zilean Python3 Library](#3.2---python3)
+- [3.2.1 - Zilean Session](#3.2.1---zilean-session)
+- [3.2.2 - Zilean Pen](#3.2.1---zilean-pen)
+- [3.2.3 - Zilean Backup](1)
+- [3.3 - Zilean Command Line](#3.3---command-line)
+- [3.2.3]
+- [3.4 - Zilean Decorators](#4---zilean-decorators)
+- [3.5 - Zilean Scripts](#5zilean-scripts)
 
 ## 1 - Getting Zilean
 classic git command
@@ -37,7 +41,7 @@ sudo pip3 install -r requiremenets.txt
 make -f Makefile makezilean
 ```
 
-## Documentation
+## 3 - Documentation
 
 Zilean Python and command line documentation
 
@@ -52,7 +56,7 @@ Zilean uses by default these settings to access to your mysql-server :
 ```
 Skip 3.1 if you have the same settings.
 
-### 3.1 Setting Zilean
+### 3.1 - Setting Zilean
 
 MySQL logs :
 
