@@ -1,3 +1,5 @@
+BEGIN;
+
 CREATE DATABASE ZileanDB;
 
 CREATE TABLE `zilean_sessions` (
@@ -43,3 +45,6 @@ CREATE TABLE `zilean_cache` (
   `p`
 
 );
+
+
+COMMIT;
