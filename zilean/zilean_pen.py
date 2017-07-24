@@ -1,6 +1,9 @@
 from .zilean_mysql_access import zilean_sql, zilean_fetch_sql
+from .zilean_decorators import op_fails_repoter
+from .zilean_jobs import _get_job as G
 
-_SHOW_DATA_BASES = "SHOW DATABASES;"
+
+_SHOW_DATABASES = "SHOW DATABASES;"
 _CREATE_DATA_BASE = "CREATE DATABASE {0};"
 _DELETE_DATA_BASE = "DROP DATABASE {0};"
 _USE_DATA_BASE = "USE {0};"
@@ -26,42 +29,54 @@ _SELECT_GENERAL = """
     WHERE {2};"""
 _SELECT_VALUES_TABLE = "SELECT ({0}) FROM {1} WHERE {2};"
 
-
+@op_fails_repoter(mode="zilean-op-type", job=G())
 def _databases():
+    return zilean_sql(_SHOW_DATABASES)
+
+@op_fails_repoter(mode="zilean-op-type", job=G())
+def _make_database(dbname):
+    return zilean_sql(_CREATE_DATABASE.format(dbname))
+
+@op_fails_repoter(mode="zilean-op-type", job=G())
+def _remove_database(dbname):
+    return zilean_sql(_DELETE_DATABASE.format(dbname))
+
+@op_fails_reporter
+def _tables(dbname):
     pass
 
-def _make_database():
+@op_fails_reporter
+def _tables_content(db, table):
     pass
 
-def _remove_database():
+@op_fails_reporter
+def _make_table(db, table, **kwargs):
     pass
 
-def _tables():
+@op_fails_reporter
+def _remove_table(db, table):
     pass
 
-def _tables_content():
+@op_fails_reporter
+def _add_field(db, table, fieldname, fieldtype):
     pass
 
-def _make_table():
+@op_fails_reporter
+def _remove_field(db, table, fieldname):
     pass
 
-def _remove_table():
+@op_fails_reporter
+def _change_field(db, table, fieldname, newfield, fieldtype):
     pass
 
-def _add_field():
+@op_fails_reporter
+def _add_element(db, table, **kwargs):
     pass
 
-def _remove_field():
+@op_fails_reporter
+def _remove_element(db, table, **kwargs):
     pass
 
-def _change_field():
-    pass
-
-def _add_element():
-    pass
-
-def _remove_element():
-    pass
-
-def _get_element():
+@op_fails_reporter
+def _get_element(db, table, **kwargs):
     pass
