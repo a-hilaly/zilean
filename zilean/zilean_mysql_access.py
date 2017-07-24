@@ -1,7 +1,6 @@
 import pymysql.cursors
 from .zilean_rtype import ZileanOP
-from .zilean_decorators import op_fails_repoter
-from .zilean_jobs import _get_job as G
+from .zilean_decorators import op_fails_reporter
 
 # -666 Mysql connection failed
 # -667 Mysql local connection failed
@@ -10,10 +9,10 @@ from .zilean_jobs import _get_job as G
 # -301 Fetch mysql execution failed
 
 # Take tuple or list or 5 elements
-@op_fails_repoter(mode="normal", job=G())
+@op_fails_reporter(mode="normal", job="subjob")
 def mlogs_mysql_connection(mlogs=None):
-    host, port, user, password, with_auto_commit = logs
     try:
+        host, port, user, password, with_auto_commit = mlogs
         return pymysql.connect(host=host,
                                user=user,
                                password=password,
@@ -21,7 +20,7 @@ def mlogs_mysql_connection(mlogs=None):
     except:
         return -666
 
-@op_fails_repoter(mode="normal", job=G())
+@op_fails_reporter(mode="normal", job="subjob")
 def kwargs_mysql_connection(host=None, port=None, user=None, password=None, with_auto_commit=True):
     try:
         return pymysql.connect(host=host,
@@ -29,39 +28,40 @@ def kwargs_mysql_connection(host=None, port=None, user=None, password=None, with
                                user=user,
                                password=password,
                                with_auto_commit=with_auto_commit).cursor()
-    return -666
+    except:
+        return -666
 
-@op_fails_repoter(mode="normal", job=G())
+@op_fails_reporter(mode="normal", job="subjob")
 def mysql_local_connection(with_auto_commit=True):
     try:
         return pymysql.connect(host="localhost",
                                user="root",
                                password="uehMLMRw",
                                with_auto_commit=with_auto_commit).cursor()
-    return
+    except:
         return -667
 
-@op_fails_reporter(mode="zilean-op-type", job=G())
+@op_fails_reporter(mode="zilean-op-type", job="subjob")
 def execute_sql(*args, cursor=None):
     try:
         for query in list(args):
             cursor.execute(query)
-        return ZileanOp(None, -9999)
+        return ZileanOP(None, -9999)
     except:
-        return ZileanOp(None, -300)
+        return ZileanOP(None, -300)
 
 def zilean_sql(*args):
     return execute_sql(*args, cursor=mysql_local_connection())
 
-@op_fails_reporter(mode="zilean-op-type", job=G())
+@op_fails_reporter(mode="zilean-op-type", job="subjob")
 def fetch_sql_result(*args, cursor=None):
     try:
         for query in list(args):
             corsor.execute(query)
-        return ZileanOp(cursor.fetchall(), -9999)
+        return ZileanOP(cursor.fetchall(), -9999)
 
     except:
-        return ZileanOp(None, -301)
+        return ZileanOP(None, -301)
 
 def zilean_fetch_sql(*args):
     return fetch_sql_result(*args, cursor=mysql_local_connection())

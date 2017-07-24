@@ -1,6 +1,14 @@
 #
 from setuptools import setup, find_packages, Command
 
+
+with open('README.md') as f:
+    readme = f.read()
+
+with open('LICENSE') as f:
+    license = f.read()
+
+
 setup(
     name='Zilean',
     version='0.0.1',

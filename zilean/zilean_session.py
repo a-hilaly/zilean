@@ -18,6 +18,9 @@ def unlink_database(database):
 def zilean_status():
     pass
 
+def report_fail():
+    pass
+
 def analyse_zilean_success_rates():
     pass
 
