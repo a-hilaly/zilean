@@ -1,6 +1,4 @@
 from .zilean_mysql_access import zilean_sql, zilean_fetch_sql
-from .zilean_decorators import op_fails_repoter
-from .zilean_jobs import _get_job as G
 
 _SHOW_DATABASES = "SHOW DATABASES;"
 _CREATE_DATA_BASE = "CREATE DATABASE {0};"
@@ -78,4 +76,51 @@ def _remove_element(db, table, **kwargs):
 
 @op_fails_reporter
 def _get_element(db, table, **kwargs):
+    pass
+
+#
+
+
+def intern_fail_reporter():
+    # Intern fail repoter
+    pass
+
+def op_fails_reporter(mode="", job=None):
+    def wrap_func(func):
+        def wrap_args(*args, **kwargs):
+            if job == "subjob":
+                incr_subjob()
+            else:
+                incr_job()
+            job = get_job()
+            res = func(*args, **kwargs)
+            t = time.ctime()
+            if isinstance(res, ZileanOP):
+                if res.status != -9999:
+                    report_fail(func, job, t, res.status, res.out_put, args=args, kwargs=kwargs)
+            return res
+        return wrap_args
+    return wrap_func
+
+
+def zilean():
+    pass
+
+def unzilean():
+    pass
+
+def unzilean_ifempty():
+    pass
+
+
+def get_job():
+    return 1
+
+def incr_subjob():
+    pass
+
+def incr_job():
+    pass
+
+def set_job():
     pass
