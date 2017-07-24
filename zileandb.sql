@@ -41,10 +41,11 @@ CREATE TABLE `zilean_backups` (
   `runtime`
 );
 
-CREATE TABLE `zilean_cache` (
-  `p`
-
+CREATE TABLE `zilean_linked_databases` (
+  `database`
+  `time`
+  `formal_size`
+  `extra_info`
 );
-
 
 COMMIT;
