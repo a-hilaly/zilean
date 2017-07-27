@@ -1,101 +1,60 @@
-# Greww Makefile
-
+# Zilean Makefile
 
 # Shell
 SHELL := /bin/bash
 #Project
-PROJECT = "Greww"
+PROJECT = "Zilean"
 #Version
-RELEASE = "0.0.0"
+RELEASE = "0.0.1"
 #Authors
 AUTHORS = ""
 # Compiler
-CXX ?= g++
-# CPP files
-CGREW = "greww/cgreww"
+PYTHON ?= python3
+# SQL files
+SQLDIR = "zilean/"
 # Path to source directory
-GREWW_PATH := .
+ZILEAN_PATH := .
 # OS machine
 OS_TYPE = 'uname -a'
-# CPP EXTENSIONS
-CPP_EXT = ".cpp"
-# CPP Binaries
-CPP_BIN = ".so"
+# PYTHON EXTENSIONS
+PY_EXT = ".py"
+# SQL SCRIPTS EXTENSIONS
+SQL_EXT = ".sql"
 
-# read files function
-
-
-
-
-# This is like bash files
-
-# VENV
-
-#_virtualenv:
-#	# create virtual env
-#	virtualenv _virtualenv
-#	_virtualenv/bin/pip install --upgrade pip
-#	_virtualenv/bin/pip install --upgrade setuptools
-#
-#_use_env:
-#	# use virtual env
-#	source _virtualenv/bin/activate
-
-# SHARED COMPILE CPP
-
-cleanbincpp:
-	rm -rf greww/cgreww/*.so
-
-##### PYTHON
-
-prebuild:
-	@echo "Preparing Greww build"
-	@echo "Installing requirements"
+getreq:
+	@echo "[INFO] Installing requirements"
 	pip install -r requirements.txt
 
-cbuild:
-	make -f $(CGREW) Makefile all
+getbreq:
+	@echo "[INFO] Installing Babtu requirements"
+	babtu --makebreq breq.txt
 
-configuration:
-	echo "Configuring machine"
-	#
-	# make directions and constants at Shell
-	#
+zilean_python_install:
+	@echo "[INFO] Installing Zilean python package"
+	python3 setup.py install
 
-setup:
-	echo "Setup Greww"
-	sudo python setup.py install
+zilean_make_dependencies:
+	python3 setup.py makedependencies
+
+zilean_initial_configuration:
+	python3 zilean.py config --init
+
+zilean_cmd_install:
+	bash zilean_cmd.sh makezilean
+
+clearzileancache:
+	python3 zilean.py clearcache
 
 test:
-	echo "Test Greww"
+	echo "[INFO] Testing Zilean"
 	python setup.py test
 
 reported_test:
-	echo "Test Greww with reports"
+	echo "[INFO] Test Zilean with reports"
 	sudo python setup.py rtest
-
-
-# register:
-#	  python setup.py register
 
 clean:
 	rm -f MANIFEST
 	rm -rf build dist
-
-#deactivate_env:
-#	deactivate
-
-#ifneq ($(wildcard test-requirements.txt),)
-#	_virtualenv/bin/pip install -r test-requirements.txt
-#endif
-#	make clean
-
-mkcpp:
-	make -f greww/cgreww/Makefile all
-
-
-
-all: prebuild configuration setup
-
 
 .PHONY: clean
