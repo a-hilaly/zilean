@@ -9,6 +9,7 @@ CREATE DATABASE zileansystem;
 CREATE TABLE `zilean_env` (
   `mode` VARCHAR(25) NOT NULL,
   `working_directory` VARCHAR(25) NOT NULL,
+  `_use_pure` BOOLEAN NOT NULL,
   `databases` VARCHAR(25) NOT NULL,
   `recording_pen_history` BOOLEAN NOT NULL,
   `recording_fails` BOOLEAN NOT NULL,
