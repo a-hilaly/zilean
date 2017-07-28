@@ -48,7 +48,9 @@ _SELECT_VALUES_TABLE = "SELECT ({0}) FROM {1} WHERE {2};"
 @_refetch_filter([1])
 def _databases():
     """
-    return a list of strings containing mysql databases names"
+    return a list of strings containing msql databases
+    ================================================
+    >>> from zilean.zilean_pen import _databases
     >>> _databases()
     ["sys", "mysql"]
     """
@@ -131,23 +133,6 @@ def _get_element(db, table, **kwargs):
 def intern_fail_reporter():
     # Intern fail repoter
     pass
-
-def op_fails_reporter(mode="", job=None):
-    def wrap_func(func):
-        def wrap_args(*args, **kwargs):
-            if job == "subjob":
-                incr_subjob()
-            else:
-                incr_job()
-            job = get_job()
-            res = func(*args, **kwargs)
-            t = time.ctime()
-            if isinstance(res, ZileanOP):
-                if res.status != -9999:
-                    report_fail(func, job, t, res.status, res.out_put, args=args, kwargs=kwargs)
-            return res
-        return wrap_args
-    return wrap_func
 
 
 def zilean():
