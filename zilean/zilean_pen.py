@@ -36,6 +36,7 @@ _CHANGE_COLUMN = """
     ALTER TABLE {0}
     CHANGE {1} {2} {3};"""
 
+# INSERT INTO `zilean_linked_databases` (`database`, `id_backups`) VALUES ( 'kikouuteeee', '["ddd"]' );
 _ADD_VALUE = "INSERT INTO {0} VALUES ({1});"
 _ADD_VALUE_WK = "INSERT INTO {0} ({1}) VALUES ({2});"
 
