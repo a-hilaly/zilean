@@ -25,6 +25,8 @@ def report_fail():
 def analyse_zilean_success_rates():
     pass
 
+
+
 class ZileanSession(object):
     def __init__(self):
         self.args = zilean_session_cache()

@@ -6,7 +6,6 @@ BEGIN;
 
 CREATE DATABASE zileancache;
 
-
 CREATE TABLE `zilean_sessions` (
   `session_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `status` enum('active', 'inactive', 'failed', 'aboarted'),
@@ -24,7 +23,7 @@ CREATE TABLE `zilean_intern_jobs` (
   `started_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `finished_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`job_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `zilean_pen_history` (
   `zilean_move_id` INT(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -36,7 +35,7 @@ CREATE TABLE `zilean_pen_history` (
   `out_put` JSON,
   `success` BOOLEAN DEFAULT 0,
   PRIMARY KEY (`zilean_move_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `zilean_fails` (
   `fail_id` INT(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -51,7 +50,7 @@ CREATE TABLE `zilean_fails` (
   `related_fails` VARCHAR(25) NOT NULL,
   `ocuracy` VARCHAR(25) NOT NULL,
   PRIMARY KEY (`fail_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `zilean_backups` (
   `backup_id` INT(8) NOT NULL,
@@ -62,6 +61,7 @@ CREATE TABLE `zilean_backups` (
   `exit_status` VARCHAR(5) NOT NULL,
   `working_directory` VARCHAR(5) NOT NULL,
   `runtime` VARCHAR(5) NOT NULL,
-);
+  PRIMARY KEY (`backup_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 COMMIT;
