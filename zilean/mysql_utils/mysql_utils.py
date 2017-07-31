@@ -10,6 +10,9 @@ from .mysql_query import (_SHOW_DATABASES,
 # INSERT INTO `zilean_linked_databases` (`database`, `id_backups`) VALUES ( 'kikouuteeee', '["ddd"]' );
 
 
+def op_fails_reporter(mode=None, job=None):
+    pass
+
 #@op_fails_reporter(mode="zilean-op-type", job=G())
 @_refetch_filter([1])
 def _databases():
