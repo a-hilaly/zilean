@@ -1,5 +1,5 @@
 import mysql.connector
-from .zilean_rtype import ZileanOP
+from zilean.sys.models.zilean_rtype import ZileanOP
 from zilean._logs import MYSQL_LOGS
 
 # Take tuple or list or 5 elements

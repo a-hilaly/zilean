@@ -1,6 +1,6 @@
-from zilean.mysql.mysql_access import (zilean_sql,
-                                       zilean_fetch_sql)
-from zilean.models.zilean_rtype import _refetch_filter
+from zilean.mysql_utils.mysql_access import (zilean_sql,
+                                             zilean_fetch_sql)
+from zilean.sys.models.zilean_rtype import _refetch_filter
 from .mysql_query import (_SHOW_DATABASES,
                           _CREATE_DATABASE,
                           _DELETE_DATABASE,
@@ -9,8 +9,10 @@ from .mysql_query import (_SHOW_DATABASES,
 
 # INSERT INTO `zilean_linked_databases` (`database`, `id_backups`) VALUES ( 'kikouuteeee', '["ddd"]' );
 
-
 def op_fails_reporter(mode=None, job=None):
+    pass
+
+def op_moves_reporter():
     pass
 
 #@op_fails_reporter(mode="zilean-op-type", job=G())
