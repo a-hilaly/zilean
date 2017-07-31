@@ -21,9 +21,10 @@ CREATE TABLE `zilean_env` (
   PRIMARY KEY (`default_mode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `zilean_env` (`default_mode`)
+INSERT INTO `zilean_env` (`default_mode`, `working_directory`)
 VALUES (
-  'zilean_default_mode'
+  'zilean_default_mode',
+  'zilean-path-not-implmented'
 );
 
 CREATE TABLE `zilean_linked_databases` (
