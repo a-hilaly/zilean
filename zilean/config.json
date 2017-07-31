@@ -1,8 +1,16 @@
 [
   {
-    "host" : "localhost",
-    "port" : 22,
-    "user" : "root",
-    "password" : "uehMLMRw"
+    "mysql" : {
+      "host" : "localhost",
+      "port" : 22,
+      "user" : "root",
+      "password" : "uehMLMRw"
+    },
+    "config" : {
+      "config" : "NaN"
+    },
+    "service" : {
+      "service" : "NaN"
+    }
   }
 ]

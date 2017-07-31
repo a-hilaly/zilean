@@ -1,5 +1,6 @@
 import mysql.connector
 from .zilean_rtype import ZileanOP
+from zilean._logs import get_logs_object
 
 # Take tuple or list or 5 elements
 #@op_fails_reporter(mode="normal", job="subjob")
