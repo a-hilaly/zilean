@@ -1,31 +1,3 @@
-#
-
-
-def check_zilean_dependencies():
-    pass
-
-def make_zilean_dependencies():
-    pass
-
-def zilean_session_cache():
-    pass
-
-def link_database(database):
-    pass
-
-def unlink_database(database):
-    pass
-
-def zilean_status():
-    pass
-
-def report_fail():
-    pass
-
-def analyse_zilean_success_rates():
-    pass
-
-
 
 class ZileanSession(object):
     def __init__(self):

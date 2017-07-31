@@ -1,6 +1,6 @@
 import mysql.connector
 from .zilean_rtype import ZileanOP
-from zilean._logs import get_logs_object
+from zilean._logs import MYSQL_LOGS
 
 # Take tuple or list or 5 elements
 #@op_fails_reporter(mode="normal", job="subjob")
@@ -54,9 +54,7 @@ def mysql_local_connection():
     ======================================================
     """
     try:
-        return mysql.connector.connect(host="localhost",
-                                       user="root",
-                                       password="uehMLMRw",
+        return mysql.connector.connect(**MYSQL_LOGS,
                                        use_pure=True,
                                        raise_on_warnings=True).cursor()
     except:
