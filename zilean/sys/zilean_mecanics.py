@@ -80,3 +80,15 @@ def analyse_zilean_success_rates():
 
 def reset_zilean_succes_rate():
     pass
+
+def get_zilean_moves_history():
+    pass
+
+def get_zilean_fails_history():
+    pass
+
+def get_zilean_jobs_history():
+    pass
+
+
+def

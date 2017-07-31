@@ -4,7 +4,7 @@ BEGIN;
     Zilean System Database
 */
 
-CREATE DATABASE IF NOT EXISTS zileansystem;
+CREATE DATABASE zileansystem;
 
 USE zileansystem;
 
