@@ -2,7 +2,8 @@ import os
 import json
 
 #@report fail too
-def get_logs_object(config):
+
+def get_config_object(config):
     """
     Return a Dict type containing keys and items
     of targeted config
@@ -18,6 +19,12 @@ def get_logs_object(config):
         return all_config[config]
     return
         -89
+
+
+def set_config_object(config):
+    """
+    """
+    return -98
 
 ZILEAN_CONFIG = get_logs_object("config")
 

@@ -89,6 +89,3 @@ def get_zilean_fails_history():
 
 def get_zilean_jobs_history():
     pass
-
-
-def

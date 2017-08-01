@@ -1,11 +1,10 @@
 from zilean.mysql_utils.mysql_access import (zilean_sql,
                                              zilean_fetch_sql)
 from zilean.sys.models.zilean_rtype import _refetch_filter
-from ._zileanq import (op_fails_reporter
-                       _SHOW_DATABASES,
-                       _CREATE_DATABASE,
-                       _DELETE_DATABASE,
-                       _CREATE_TABLE)
+from .mysql_query import (_SHOW_DATABASES,
+                          _CREATE_DATABASE,
+                          _DELETE_DATABASE,
+                          _CREATE_TABLE)
 
 
 # INSERT INTO `zilean_linked_databases` (`database`, `id_backups`) VALUES ( 'kikouuteeee', '["ddd"]' );
