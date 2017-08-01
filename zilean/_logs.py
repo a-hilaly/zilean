@@ -21,10 +21,10 @@ def get_config_object(config):
         -89
 
 
-def set_config_object(config):
+def set_config_object(config, dct):
     """
     """
-    return -98
+    return -88
 
 ZILEAN_CONFIG = get_logs_object("config")
 

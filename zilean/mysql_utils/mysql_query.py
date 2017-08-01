@@ -32,10 +32,12 @@ _SELECT_GENERAL = """
 _protocol_noprotocol = ' VARCHAR(10) NOT NULL,'
 _protocol_taxon = {'s' : ' VARCHAR(10),',
                    'S' : ' VARCHAR(25),',
+                   'j' : ' JSON',
                    'i' : ' INT(10),',
                    'I' : ' INT(25),',
                    'p' : ' PRIMARY KEY (`{0}`),',
                    'u' : ' UNIQUE KEY {0},',
+                   't' : ' DEFAULT CURRENT_TIME_STAMP,',
                    'T' : ' DEFAULT CURRENT_TIME_STAMP ON UPDATE CURRENT_TIMESTAMP,',
                    'e' : ' ENUM({0}),'}
 
