@@ -4,7 +4,13 @@ from zilean.sys.models.zilean_rtype import _refetch_filter
 from .mysql_query import (_SHOW_DATABASES,
                           _CREATE_DATABASE,
                           _DELETE_DATABASE,
-                          _CREATE_TABLE)
+                          _CREATE_TABLE,
+                          _USE_DATABASE,
+                          _DELETE_TABLE,
+                          _ADD_VALUE_WK,
+                          _SELECT_GENERAL,
+                          _QCT,
+                          _QIIT)
 
 
 # INSERT INTO `zilean_linked_databases` (`database`, `id_backups`) VALUES ( 'kikouuteeee', '["ddd"]' );
@@ -27,7 +33,6 @@ def _make_database(dbname):
     """
     make a mysql database
     >>> _make_database('Table')
-    ROW(0) AFFECTED !
     """
     return zilean_sql(_CREATE_DATABASE.format(dbname))
 
@@ -65,33 +70,53 @@ def _make_table(db, table, **kwargs):
 #@op_fails_reporter
 def _remove_table(db, table):
     """
-    Drop table at database
+    Drop table at db
     """
     pass
 
 #@op_fails_reporter
 def _add_field(db, table, fieldname, fieldtype):
+    """
+    Add field to table at db
+    """
     pass
 
 #@op_fails_reporter
 def _remove_field(db, table, fieldname):
+    """
+    Remove field from table at db
+    """
     pass
 
 #@op_fails_reporter
 def _change_field(db, table, fieldname, newfield, fieldtype):
+    """
+    Change field in table at db
+    """
     pass
 
 #@op_fails_reporter
 def _add_element(db, table, **kwargs):
+    """
+    add element to table at db
+    """
     pass
 
 #@op_fails_reporter
 def _remove_element(db, table, **kwargs):
+    """
+    Remove Element from table at db
+    """
     pass
 
 #@op_fails_reporter
 def _get_element(db, table, **kwargs):
+    """
+    Select elements that satisfy kwargs from table at db
+    """
     pass
+
+def _get_element_opt(db, table, opt, **kwargs)
 
 #
 
