@@ -2,7 +2,6 @@
   {
     "mysql" : {
       "host" : "localhost",
-      "port" : 22,
       "user" : "root",
       "password" : "uehMLMRw"
     },
