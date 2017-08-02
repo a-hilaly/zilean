@@ -8,7 +8,7 @@ _USE_DATABASE = "USE {0};"
 # Table querries
 _SHOW_TABLE_FIELDS = "DESC {0}.{1};"
 _SHOW_ALL_TABLES = "SHOW TABLES IN {0};"
-_CREATE_TABLE = "CREATE TABLE {0} ({1}) ENGINE=InnoDB;"
+_CREATE_TABLE = "CREATE TABLE {0} ({1}) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 _DELETE_TABLE = "DROP TABLE {0};"
 _ADD_COLUMN = """
     ALTER TABLE {0}
@@ -52,6 +52,11 @@ def _QCT(name, fields):
             _funquery += ' ' + field + _protocol_noprotocol
     _query = _CREATE_TABLE.format(name, _funquery)
     return _query[s0:-3] + _query[-2:]
+
+def _QCT_KW(name, **kwargs):
+    return _QCT(name,
+                ["{0}:{1}".format(j, i) for i, j in kwargs.items()])
+
 
 def _QIIT(table, fields=None, objects=None):
     pass

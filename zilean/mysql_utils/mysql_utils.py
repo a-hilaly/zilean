@@ -1,9 +1,10 @@
-from zilean.mysql_utils.mysql_access import (zilean_sql,
-                                             zilean_fetch_sql)
+from zilean.mysql_utils.mysql_access import (execute_only,
+                                             execute_and_fetch)
 from zilean.sys.models.zilean_rtype import _refetch_filter
 from .mysql_query import (_SHOW_DATABASES,
                           _CREATE_DATABASE,
                           _DELETE_DATABASE,
+                          _SHOW_ALL_TABLES,
                           _CREATE_TABLE,
                           _USE_DATABASE,
                           _DELETE_TABLE,
@@ -15,7 +16,7 @@ from .mysql_query import (_SHOW_DATABASES,
 # INSERT INTO `zilean_linked_databases` (`database`, `id_backups`) VALUES ( 'kikouuteeee', '["ddd"]' );
 
 #@op_fails_reporter(mode="zilean-op-type", job=G())
-@_refetch_filter([1])
+@_refetch_filter([0])
 def _databases():
     """
     return a list of strings containing msql databases
@@ -24,7 +25,7 @@ def _databases():
     >>> _databases()
     ["sys", "mysql"]
     """
-    return zilean_fetch_sql(_SHOW_DATABASES)
+    return execute_and_fetch(_SHOW_DATABASES)
 
 #@op_fails_reporter(mode="zilean-op-type", job=G())
 def _make_database(dbname):
@@ -32,23 +33,24 @@ def _make_database(dbname):
     make a mysql database
     >>> _make_database('Table')
     """
-    return zilean_sql(_CREATE_DATABASE.format(dbname))
+    return execute_only(_CREATE_DATABASE.format(dbname))
 
 #@op_fails_reporter(mode="zilean-op-type", job=G())
 def _remove_database(dbname):
     """
     Remove a mysql database
     """
-    return zilean_sql(_DELETE_DATABASE.format(dbname))
+    return execute_only(_DELETE_DATABASE.format(dbname))
 
 #@op_fails_reporter
+@_refetch_filter([0])
 def _tables(dbname):
     """
     return a list of strings containing mysql tables at one given database
     >>> _tables("sys")
     ["host_ip", "host_kappa" ... ""]
     """
-    return zilean_fetch_sql(_SHOW_ALL_TABLES.format(dbname))
+    return execute_and_fetch(_SHOW_ALL_TABLES.format(dbname))
 
 #@op_fails_reporter
 def _table_content(db, table):
@@ -57,13 +59,14 @@ def _table_content(db, table):
     >>> _table_content("sys", "host_ip")
     [[]]
     """
-    return zilean_fetch_sql(_SHOW_TABLE_VALUES.format(db, table))
+    return execute_and_fetch(_SHOW_TABLE_VALUES.format(db, table))
 
 #@op_fails_reporter
 def _make_table(db, table, **kwargs):
     """
     Create a table at database with kwargs in format "field"="type,spe,len"
     """
+    pass
 
 #@op_fails_reporter
 def _remove_table(db, table):

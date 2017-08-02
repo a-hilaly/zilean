@@ -15,25 +15,46 @@ class ZileanOP(object):
     ================================================
     """
     def __init__(self, result=None, status=0):
-        self.result = "" if result is None else result
+        self.out_put = "" if result is None else result
         self.exit_status = status
 
     def __call__(self):
         return self.__dict__
 
+    def __str__(self):
+        if self.status < -9000:
+            return "Zilean successed with : {0}".format(self.status)
+        return "Zilean failed with : {0}".format(self.status)
+
+    __repr__ = __str__
+
     @property
     def status(self):
         return self.exit_status
 
-    @property
-    def out_put(self):
-        return self.result
+    @status.setter
+    def status(self, s):
+        self.exit_status = s
 
+    @property
+    def result(self):
+        return self.out_put
+
+    @result.setter
+    def result(self, r):
+        self.out_put = r
+
+
+def tuplik(*args):
+    a = list(args)
+    if len(a) == 1:
+        return a
+    return tuple(a)
 
 def _refetch_filter(indexes):
     """
-    Decorator to functions that out put a ZileanOP type
-    With a list a result
+    Decorator to functions that out put a ZileanOP to
+    reselect mostly mysql tuple out_puts in result list
     ===================================================
     >>> f = lambda n: [ZileanOP((x, x+1, x+2), -9999)\
                        for x in range(n)]
@@ -48,12 +69,14 @@ def _refetch_filter(indexes):
             return func
         def wrap_args(*args, **kwargs):
             res = func(*args, **kwargs)
+            ress = []
             try:
-                ress = []
-                for i in indexes:
-                    ress += res[i]
-                return ress
+                for i in res.result:
+                    ress += tuplik(*[i[j] for j in indexes])
+                    res.result, res.status = ress, -9998
+                return res
             except:
+                res.status = -8
                 return res
         return wrap_args
     return wrap_func
