@@ -21,7 +21,7 @@ def mlogs_mysql_connection(*mlogs):
                                        user=user,
                                        password=password,
                                        use_pure=use_pure,
-                                       raise_on_warnings=row).cursor()
+                                       raise_on_warnings=row)
     except:
         return -666
 
@@ -43,7 +43,7 @@ def kwargs_mysql_connection(host=None,
                                        user=user,
                                        password=password,
                                        use_pure=use_pure,
-                                       raise_on_warnings=raise_on_warnings).cursor()
+                                       raise_on_warnings=raise_on_warnings)
     except:
         return -666
 
@@ -61,54 +61,55 @@ def mysql_local_connection():
         return -667
 
 #@op_fails_reporter(mode="zilean-op-type", job="subjob")
-def execute_sql(*args, cursor=None):
+def execute_only_sql(*args):
     """
     Execute a serie of queries to known cursor
     =====================================================
     >>> from zilean import execute_sql
     >>> from zilean import mysql_local_connection
     >>> crs = m()
-    >>> execute_sql(query1, query2, cursor=crs)
+    >>> execute_sql(query1, query2, cursor=crs).__call__()
+    { "result" : '', "status" : -9999}
     =====================================================
     """
     try:
+        cnx = mysql.connector.connect(**MYSQL_LOGS,
+                                      use_pure=True,
+                                      raise_on_warnings=True)
+        cursor = cnx.cursor()
+    except:
+        return ZileanOP(None, -667)
+    try:
         for query in list(args):
             cursor.execute(query)
-        return ZileanOP(cursor, -9999)
+        return ZileanOP(None, -9999)
     except:
         return ZileanOP(None, -300)
 
-def zilean_sql(*args):
+def execute_and_fetch_sql(*args):
     """
-    Execute a serie of queries at the localhosted mysql-server
-    =====================================================
-    """
-    return execute_sql(*args, cursor=mysql_local_connection())
-
-#@op_fails_reporter(mode="zilean-op-type", job="subjob")
-def fetch_sql_result(*args, cursor=None):
-    """
-    Execute a serie of queries to known cursor and fetch it result
+    Execute a serie of queries to known cursor
     =====================================================
     >>> from zilean import execute_sql
     >>> from zilean import mysql_local_connection
     >>> crs = m()
-    >>> execute_sql(query1, query2, cursor=crs)
-    op
+    >>> execute_sql("SHOW DATABASE", cursor=crs).result
+    [('information_schema',), ('mysql',), ('performance_schema',), ('sys',), ('zileansystem',)]
     =====================================================
     """
+    result = []
+    try:
+        cnx = mysql.connector.connect(**MYSQL_LOGS,
+                                      use_pure=True,
+                                      raise_on_warnings=True)
+        cursor = cnx.cursor()
+    except:
+        return ZileanOP(result, -667)
     try:
         for query in list(args):
             cursor.execute(query)
-        return ZileanOP(cursor.fetchall(), -9999)
-
+        for e in cursor:
+            result.append(e)
+        return ZileanOP(result, -9999)
     except:
-        return ZileanOP(None, -301)
-
-def zilean_fetch_sql(*args):
-    """
-    Fetch the result after executing serie of queries at
-    the localhosted mysql-server
-    =====================================================
-    """
-    return fetch_sql_result(*args, cursor=mysql_local_connection())
+        return ZileanOP(result, -300)
