@@ -12,9 +12,7 @@ from .mysql_query import (_SHOW_DATABASES,
                           _QCT,
                           _QIIT)
 
-
 # INSERT INTO `zilean_linked_databases` (`database`, `id_backups`) VALUES ( 'kikouuteeee', '["ddd"]' );
-
 
 #@op_fails_reporter(mode="zilean-op-type", job=G())
 @_refetch_filter([1])
@@ -110,13 +108,14 @@ def _remove_element(db, table, **kwargs):
     pass
 
 #@op_fails_reporter
-def _get_element(db, table, **kwargs):
+def _select_element(db, table, **kwargs):
     """
     Select elements that satisfy kwargs from table at db
     """
     pass
 
-def _get_element_opt(db, table, opt, **kwargs)
+def _select_element_opt(db, table, opt, **kwargs):
+    pass
 
 #
 

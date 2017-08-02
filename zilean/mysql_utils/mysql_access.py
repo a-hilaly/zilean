@@ -74,7 +74,7 @@ def execute_sql(*args, cursor=None):
     try:
         for query in list(args):
             cursor.execute(query)
-        return ZileanOP(None, -9999)
+        return ZileanOP(cursor, -9999)
     except:
         return ZileanOP(None, -300)
 
