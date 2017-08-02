@@ -8,7 +8,7 @@ _USE_DATABASE = "USE {0};"
 # Table querries
 _SHOW_TABLE_FIELDS = "DESC {0}.{1};"
 _SHOW_ALL_TABLES = "SHOW TABLES IN {0};"
-_CREATE_TABLE = "CREATE TABLE {0} ({1}) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+_CREATE_TABLE = "CREATE TABLE {0}.{1} ({2}) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
 _DELETE_TABLE = "DROP TABLE {0};"
 _ADD_COLUMN = """
     ALTER TABLE {0}
@@ -40,7 +40,7 @@ _protocol_taxon = {'s' : ' VARCHAR(10),',
                    'T' : ' DEFAULT CURRENT_TIME_STAMP ON UPDATE CURRENT_TIMESTAMP,',
                    'e' : ' ENUM({0}),'}
 
-def _QCT(name, fields):
+def _QCT(db, name, fields):
     _funquery = ''
     for field in fields:
         if ':' in field:
@@ -50,11 +50,12 @@ def _QCT(name, fields):
                 _funquery += _protocol_taxon[c].format(field1)
         else:
             _funquery += ' ' + field + _protocol_noprotocol
-    _query = _CREATE_TABLE.format(name, _funquery)
+    _query = _CREATE_TABLE.format(db, name, _funquery)
     return _query[s0:-3] + _query[-2:]
 
 def _QCT_KW(name, **kwargs):
-    return _QCT(name,
+    return _QCT(db,
+                name,
                 ["{0}:{1}".format(j, i) for i, j in kwargs.items()])
 
 

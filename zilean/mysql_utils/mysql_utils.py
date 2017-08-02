@@ -66,7 +66,7 @@ def _make_table(db, table, **kwargs):
     """
     Create a table at database with kwargs in format "field"="type,spe,len"
     """
-    pass
+    return execute_only(_QCT_KW(db, table, **kwargs))
 
 #@op_fails_reporter
 def _remove_table(db, table):
