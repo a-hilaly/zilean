@@ -8,7 +8,11 @@ _USE_DATABASE = "USE {0};"
 # Table querries
 _SHOW_TABLE_FIELDS = "DESC {0}.{1};"
 _SHOW_ALL_TABLES = "SHOW TABLES IN {0};"
-_CREATE_TABLE = "CREATE TABLE {0}.{1} ({2}) ENGINE=InnoDB DEFAULT CHARSET=latin1;"
+_CREATE_TABLE = """
+CREATE TABLE {0}.{1} (
+    {2}
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+"""
 _DELETE_TABLE = "DROP TABLE {0};"
 _ADD_COLUMN = """
     ALTER TABLE {0}
@@ -51,9 +55,9 @@ def _QCT(db, name, fields):
         else:
             _funquery += ' ' + field + _protocol_noprotocol
     _query = _CREATE_TABLE.format(db, name, _funquery)
-    return _query[s0:-3] + _query[-2:]
+    return _query[0:-3] + _query[-2:]
 
-def _QCT_KW(name, **kwargs):
+def _QCT_KW(db, name, **kwargs):
     return _QCT(db,
                 name,
                 ["{0}:{1}".format(j, i) for i, j in kwargs.items()])

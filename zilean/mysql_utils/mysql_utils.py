@@ -10,7 +10,7 @@ from .mysql_query import (_SHOW_DATABASES,
                           _DELETE_TABLE,
                           _ADD_VALUE_WK,
                           _SELECT_GENERAL,
-                          _QCT,
+                          _QCT_KW,
                           _QIIT)
 
 # INSERT INTO `zilean_linked_databases` (`database`, `id_backups`) VALUES ( 'kikouuteeee', '["ddd"]' );

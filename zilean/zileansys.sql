@@ -9,7 +9,8 @@ CREATE DATABASE zileansystem;
 USE zileansystem;
 
 CREATE TABLE `zilean_env` (
-  `default_mode` VARCHAR(25) NOT NULL,
+  `mode_name` VARCHAR(25) NOT NULL,
+  `activated` BOOLEAN DEFAULT 1,
   `working_directory` VARCHAR(50) NOT NULL,
   `mysql_connector_use_pure` BOOLEAN DEFAULT 1,
   `recording_sessions` BOOLEAN DEFAULT 1,
@@ -32,6 +33,13 @@ CREATE TABLE `zilean_linked_databases` (
   `linked_time` timestamp DEFAULT CURRENT_TIMESTAMP,
   `id_backups` JSON,
   PRIMARY KEY (`database`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `zilean_linked_directories` (
+  `directory` VARCHAR(40) NOT NULL,
+  `linked_time` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `id_backups` JSON,
+  PRIMARY KEY (`directory`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 COMMIT;
