@@ -6,7 +6,7 @@
 # -300 Mysql execution failed
 # -301 Fetch mysql execution failed
 
-def report_if_fails(mode="", job=None):
+def record_if_fails(mode="", job=None):
     def wrap_func(func):
         def wrap_args(*args, **kwargs):
             if job == "subjob":
@@ -22,3 +22,15 @@ def report_if_fails(mode="", job=None):
             return res
         return wrap_args
     return wrap_func
+
+
+def with_new_session_id():
+    pass
+
+
+def record_move():
+    pass
+
+
+def record_backup():
+    pass
