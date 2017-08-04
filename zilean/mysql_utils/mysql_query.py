@@ -14,7 +14,7 @@ _SHOW_ALL_TABLES = "SHOW TABLES IN {0};"
 
 _CREATE_TABLE = """
 CREATE TABLE {0}.{1} (
-  {2}
+{2}
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 """
 
@@ -23,23 +23,38 @@ CREATE TABLE {0}.{1} (
 # cause some obvious conficlts
 def _dp(s, mode=None):
     # decode dict protocol
-    pass
+    s1 = s
+    s2 = s
+    return s1, s2
 
 def _make_field_line2(a, b, comma=True, new_line=True):
-    if comma and new_line: return "  `{0}` {1},\n"
-    elif comma and not new_line: return"  `{0}` {1},"
-    elif not comma and new_line: return"  `{0}` {1}\n"
-    else: return"  `{0}` {1}"
+    if comma and new_line:
+        return "  `{0}` {1},\n".format(a, b)
+    elif comma and not new_line:
+        return "  `{0}` {1},".format(a, b)
+    elif (not comma) and new_line:
+        return "  `{0}` {1}\n".format(a, b)
+    else:
+        return "  `{0}` {1}".format(a, b)
 
-def _make_extra_line2():
+def _make_extra_line2(protocol, target=None, ):
     pass
 
 def _p_cqt(db=None, table=None, **kwargs):
     # protocol call
-    nkwargs = _dp(kwargs, mode="safe")
+    nkwargs, properties = _dp(kwargs, mode="safe")
     n = len(nkwargs)
+    count = n
+    comma = True
+    new_line=True
+    m = ""
     for field, _type in nkwargs.items():
-        pass
+        if count < 2:
+            comma = False
+            new_line = False
+        m += _make_field_line2(field, _type, comma=comma, new_line=new_line)
+        count -= 1
+    return _CREATE_TABLE.format(db, table, m)
 
 
 def _ha_cqt(db=None, table=None, **kwargs):
