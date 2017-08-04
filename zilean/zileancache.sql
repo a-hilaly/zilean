@@ -37,7 +37,7 @@ CREATE TABLE `zilean_pen_history` (
   PRIMARY KEY (`zilean_move_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `zilean_fails` (
+CREATE TABLE `zilean_intern_fails` (
   `fail_id` INT(10) unsigned NOT NULL AUTO_INCREMENT,
   `move_id` INT(10) NOT NULL,
   `type` enum('intern', 'mysql_query', 'mysql_conection', 'outer', 'unknown', 'unclassified'),
@@ -45,11 +45,21 @@ CREATE TABLE `zilean_fails` (
   `called_function` VARCHAR(50) NOT NULL,
   `error_id` INT(5) NOT NULL,
   `job_id` INT(10) NOT NULL,
-  `out_put` JSON,
   `arguments` JSON,
   `related_fails` JSON,
   `ocuracy` INT(4) NOT NULL,
   PRIMARY KEY (`fail_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `zilean_extern_fails` (
+  `fail_id` INT(10) unsigned NOT NULL AUTO_INCREMENT,
+  `caller` VARCHAR(30) NOT NULL,
+  `called_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `finished_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `function` VARCHAR(30) NOT NULL,
+  `arguments` JSON,
+  `out_put` JSON,
+  PRIMARY KEY (`faild_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `zilean_database_backups` (
