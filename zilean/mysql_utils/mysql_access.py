@@ -17,7 +17,7 @@ def mysql_local_connection():
         return -667
 
 #@op_fails_reporter(mode="zilean-op-type", job="subjob")
-def execute_only(*args):
+def execute_only(*args, commit=False):
     """
     Execute a serie of queries to known cursor
     =====================================================
@@ -38,11 +38,13 @@ def execute_only(*args):
     try:
         for query in list(args):
             cursor.execute(query)
+        if commit:
+            cnx.commit()
         return ZileanOP(None, -9999)
     except:
         return ZileanOP(None, -300)
 
-def execute_and_fetch(*args):
+def execute_and_fetch(*args, commit=False):
     """
     Execute a serie of queries to known cursor
     =====================================================
@@ -66,6 +68,8 @@ def execute_and_fetch(*args):
             cursor.execute(query)
         for e in cursor:
             result.append(e)
+        if commit:
+            cnx.commit()
         return ZileanOP(result, -9999)
     except:
         return ZileanOP(result, -300)
