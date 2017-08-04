@@ -9,22 +9,23 @@ CREATE DATABASE zileansystem;
 USE zileansystem;
 
 CREATE TABLE `zilean_env` (
-  `mode_name` VARCHAR(25) NOT NULL,
-  `activated` BOOLEAN DEFAULT 1,
+  `mode` VARCHAR(25) NOT NULL,
+  `status` enum('active', 'null') DEFAULT 'null',
   `working_directory` VARCHAR(50) NOT NULL,
   `mysql_connector_use_pure` BOOLEAN DEFAULT 1,
   `recording_sessions` BOOLEAN DEFAULT 1,
   `recording_pen_history` BOOLEAN DEFAULT 1,
   `recording_fails` BOOLEAN DEFAULT 1,
-  `recording_intern_jobs` BOOLEAN DEFAULT 1,
-  `recording_backups` BOOLEAN DEFAULT 1,
+  `recording_db_backups` BOOLEAN DEFAULT 1,
+  `recording_dr_backups` BOOLEAN DEFAULT 1,
   `default_backup_type` VARCHAR(10) DEFAULT 'default',
-  PRIMARY KEY (`default_mode`)
+  PRIMARY KEY (`mode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `zilean_env` (`default_mode`, `working_directory`)
+INSERT INTO `zilean_env` (`mode`, `status`, `working_directory`)
 VALUES (
   'zilean_default_mode',
+  'active',
   'zilean-path-not-implmented'
 );
 

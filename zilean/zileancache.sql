@@ -19,7 +19,7 @@ CREATE TABLE `zilean_sessions` (
 CREATE TABLE `zilean_intern_jobs` (
   `job_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `sub_jobs` JSON,
-  `status` enum('active', 'inactive', 'failed'),
+  `status` enum('active', 'inactive', 'failed', 'finished'),
   `started_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `finished_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`job_id`)

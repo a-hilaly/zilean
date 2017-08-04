@@ -6,7 +6,7 @@
 # -300 Mysql execution failed
 # -301 Fetch mysql execution failed
 
-def op_fails_reporter(mode="", job=None):
+def report_if_fails(mode="", job=None):
     def wrap_func(func):
         def wrap_args(*args, **kwargs):
             if job == "subjob":
@@ -17,7 +17,7 @@ def op_fails_reporter(mode="", job=None):
             res = func(*args, **kwargs)
             t = time.ctime()
             if isinstance(res, ZileanOP):
-                if res.status != -9999:
+                if res.status > -9000:
                     report_fail(func, job, t, res.status, res.out_put, args=args, kwargs=kwargs)
             return res
         return wrap_args

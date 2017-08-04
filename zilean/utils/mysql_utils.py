@@ -120,49 +120,24 @@ def _add_element(db, table, **kwargs):
     return execute_only(_IE_QUERY(db, table, **kwargs), commit=True)
 
 #@op_fails_reporter
-def _remove_selection(db, table, with_limit=-1, **kwargs):
+def _remove_elements(db, table, with_limit=-1, **kwargs):
     """
     Remove Element from table at db
     =======================================================
     """
-    return with_limit
+    return execute_only()
 
 #@op_fails_reporter
-def _select_element(db, table, with_limit=-1, **kwargs):
+def _select_elements(db, table, **kwargs):
     """
     Select elements that satisfy kwargs from table at db
     =======================================================
     """
     pass
 
-def _select_element_opt(db, table, opt, **kwargs):
-    pass
-
-#
-
-
-def intern_fail_reporter():
-    # Intern fail repoter
-    pass
-
-
-def zilean():
-    pass
-
-def unzilean():
-    pass
-
-def unzilean_ifempty():
-    pass
-
-def get_job():
-    return 1
-
-def incr_subjob():
-    pass
-
-def incr_job():
-    pass
-
-def set_job():
+def _select_elements_optimised():
+    """
+    Not Implemented
+    =======================================================
+    """
     pass

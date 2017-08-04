@@ -30,11 +30,17 @@ _INSERT_VALUE_WK = """INSERT INTO {0}.{1}
 {2}
 VALUES {3};"""
 
+_DELETE_VALUES = """
+"""
+
 _SHOW_TABLE_VALUES = "SELECT * FROM {0}.{1};"
-_SELECT_GENERAL = """
-SELECT {0}
-FROM {1}
-WHERE {2};"""
+_SELECT_GENERAL = """ SELECT *
+FROM {1}.{2}
+WHERE {3};"""
+
+_SELECT_GENERAL_WL = """ SELECT *
+FROM {1}.{2}
+WHERE {3};"""
 
 
 # /!\ Warning in the next 2 functions :
