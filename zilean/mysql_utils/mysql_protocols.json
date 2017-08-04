@@ -1,5 +1,16 @@
 [
   {
-    
+
+    "string" : "VARCHAR(10)",
+    "String" : "VARCHAR(25)",
+    "BigString" : "VARCHAR(100)",
+    "Json" : "JSON",
+    "i" : "INT(10)",
+    "I" : "INT(25)",
+    "p" : "PRIMARY KEY (`{0}`)",
+    "u" : " UNIQUE KEY {0},",
+    "t" : " DEFAULT CURRENT_TIME_STAMP,",
+    "T" : " DEFAULT CURRENT_TIME_STAMP ON UPDATE CURRENT_TIMESTAMP,",
+    "e" : " ENUM({0}),"
   }
 ]
