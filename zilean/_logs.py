@@ -2,7 +2,6 @@ import os
 import json
 
 
-
 #@report fail too
 
 def get_config_object(config):

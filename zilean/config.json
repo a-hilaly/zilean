@@ -1,15 +1,15 @@
 [
   {
     "mysql" : {
-      "host" : "localhost",
-      "user" : "root",
-      "password" : "uehMLMRw"
+        "host" : "localhost",
+        "user" : "root",
+        "password" : "uehMLMRw"
     },
-    "config" : {
-      "config" : "NaN"
+    "zilean-config" : {
+        "max_runtime_per_function" : 1000
     },
-    "service" : {
-      "service" : "NaN"
+    "backup-config" : {
+        "service" : "NaN"
     }
   }
 ]
