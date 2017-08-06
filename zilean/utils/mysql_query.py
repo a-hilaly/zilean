@@ -5,7 +5,7 @@ _DELETE_DATABASE = "DROP DATABASE {0};"
 _USE_DATABASE = "USE {0};"
 
 # Table querries
-_SHOW_TABLE_FIELDS = "DESC {0}.{1};"
+_TABLE_FIELDS = "DESC {0}.{1};"
 _SHOW_TABLES = "SHOW TABLES IN {0};"
 
 _CREATE_TABLE = """CREATE TABLE {0}.{1} (
@@ -15,13 +15,12 @@ _CREATE_TABLE = """CREATE TABLE {0}.{1} (
 _DELETE_TABLE = "DROP TABLE {0}.{1};"
 
 #COLUMN
-_ADD_COLUMN = """ALTER TABLE {0}{1}
+_ADD_COLUMN = """ALTER TABLE {0}.{1}
 ADD {2} {3};"""
-_DELETE_COLUMN = """ALTER TABLE {0}
-DROP COLUMN {1};"""
-_CHANGE_COLUMN = """
-ALTER TABLE {0}
-CHANGE {1} {2} {3};"""
+_DELETE_COLUMN = """ALTER TABLE {0}.{1}
+DROP COLUMN {2};"""
+_CHANGE_COLUMN = """ALTER TABLE {0}.{1}
+CHANGE {2} {3} {4};"""
 
 _INSERT_VALUE_NO_MATCH = """INSERT INTO {0}.{1}
 VALUES {2};"""
@@ -30,22 +29,45 @@ _INSERT_VALUE_WK = """INSERT INTO {0}.{1}
 {2}
 VALUES {3};"""
 
-_DELETE_VALUES = """
-"""
+_DELETE_VALUES = """DELETE FROM {0}.{1}
+WHERE {2}"""
 
 _SHOW_TABLE_VALUES = "SELECT * FROM {0}.{1};"
-_SELECT_GENERAL = """ SELECT *
+_SELECT_GENERAL = """SELECT {0}
 FROM {1}.{2}
-WHERE {3};"""
+WHERE {3}"""
 
-_SELECT_GENERAL_WL = """ SELECT *
+_SORTED_TABLE = """SELECT {0}
 FROM {1}.{2}
-WHERE {3};"""
+ORDER BY {3} {4}
+"""
 
+_SELECT_OPTI = """SELECT {0}
+FROM {1}.{2}
+ORDER BY {3} {4}
+LIMIT {5}"""
 
-# /!\ Warning in the next 2 functions :
-# Using db or table as kwargs will
-# cause some obvious conficlts
+_UPDATE_ELEMENT = """UPDATE {0}.{1}
+SET {2}
+WHERE {3}"""
+
+_AUTOINCR = "ALTER TABLE {0}.{1} AUTO_INCREMENT = {2};"
+
+def JSON_PYSTR(a, ln=True, dct=False):
+    final = "'[{0}]'"
+    sample = '"{0}"'
+    res = ""
+    if ln:
+        c = len(a)
+        for e in a:
+            if c < 2:
+                res += sample.format(e)
+            else:
+                res += sample.format(e) + ", "
+            c -= 1
+        return final.format(res)
+    if dct:
+        raise Exception("Not Implemented")
 
 def _make_field_line2(a, b, comma=True, new_line=True):
     txt = None
@@ -94,8 +116,34 @@ def _tuplify_fields_sql(*t):
         c -= 1
     return r.format(temp)
 
+def _sg2000_no_troll_pls(*t):
+    targs = list(t)
+    if len(targs) == 1:
+        return "('{0}')".format(targs[0])
+    return str(tuple(targs))
+
 def _IE_QUERY(db, table, **kwargs):
     # Insert Element Query
     kwa = _tuplify_fields_sql(*kwargs.keys())
-    rgs = str(tuple(kwargs.values()))
+    rgs = _sg2000_no_troll_pls(*list(kwargs.values()))
     return _INSERT_VALUE_WK.format(db, table, kwa, rgs)
+
+
+def _DL_QUERY(db, table, w, lim):
+    res = _DELETE_VALUES.format(db, table, w)
+    if lim > 0:
+        return res + "\n LIMIT {0};".format(lim)
+    return res + ";"
+
+
+def _SL_QUERY(db, table, w, lim, s):
+    res = _SELECT_GENERAL.format(s, db, table, w)
+    if lim > 0:
+        return res + "\n LIMIT {0};".format(lim)
+    return res + ";"
+
+def _UE_QUERY(db, table, w, lim, s):
+    res = _UPDATE_ELEMENT.format(db, table, s, w)
+    if lim > 0:
+        return res + "\n LIMIT {0};".format(lim)
+    return res + ";"
