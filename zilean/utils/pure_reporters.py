@@ -61,9 +61,9 @@ def utils_fails_report():
     """
     pass
 
-
 def kargs(*args, **kwargs):
     return list(args) + list(kwargs.values())
+
 
 def zilean_reporter(with_time_limit=None,
                     on_fail_only=False,
