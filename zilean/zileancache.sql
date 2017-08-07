@@ -35,12 +35,22 @@ ALTER TABLE `zilean_moves_history` AUTO_INCREMENT = 0;
 
 CREATE TABLE `zilean_intern_fails` (
   `fail_id` INT(10) unsigned NOT NULL AUTO_INCREMENT,
-  `move_id`INT(10) unsigned,
-  `type` enum('intern', 'mysql_query', 'mysql_conection', 'outer', 'unknown', 'unclassified'),
+  `move_id`INT(10) unsigned NOT NULL,
+  `type` enum(
+                'logs',
+                'config',
+                'mysql_query',
+                'mysql_conection',
+                'architecture',
+                'outer',
+                'intern2',
+                'unknown',
+                'unclassified'
+              ) NOT NULL DEFAULT 'unclassified',
   `recorded_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `function` VARCHAR(50) NOT NULL,
+  `function` VARCHAR(30) NOT NULL,
+  `module` VARCHAR(20) NOT NULL,
   `error_id` INT(5),
-  `arguments` JSON,
   `related_fails` JSON,
   `ocuracy` INT(4),
   PRIMARY KEY (`fail_id`)
