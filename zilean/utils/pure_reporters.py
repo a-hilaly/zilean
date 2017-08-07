@@ -115,9 +115,3 @@ def zilean_manual_reporter(with_time_limit=None,
 
         return wrap_args
     return wrap_func
-
-def zilean_env_config():
-    def wrap_func(func):
-        def wrap_args(*args, **kwargs):
-            pass
-    pass

@@ -1,7 +1,7 @@
 from ._loaders import (load_zilean_envirenements,
                        edit_env_config)
 
-def assert_zilean_session(session_user=None, session_id=None):
+def assert_zilean_session(session_owner=None, session_id=None):
     def wrap_func(func):
         def wrap_args(*args, **kwargs):
             pass
@@ -20,7 +20,7 @@ class ZileanEnvirenement(object):
                  'default_backup_type']
 
     def __init__(self):
-        kwargs = self._load_as_dict()
+        kwargs = self._load_env_as_dict()
         for kw, val in kwargs.items():
             setattr(self, kw, val)
 
@@ -32,16 +32,16 @@ class ZileanEnvirenement(object):
 
     __repr__ = __str__
 
-    @assert_zilean_session(session="zilean")
+    #@assert_zilean_session("zilean")
     def remake_zilean_envirement(self):
         from zilean.zilean_maker import make_zilean_envirement
         make_zilean_envirement(force=True)
         self.__init__()
 
-    @staticmethod
-    def _load_as_dict():
+    @classmethod
+    def _load_env_as_dict(cls):
         envs = load_zilean_envirenements()
-        return dict(zip(self.__slots__, envs[0]))
+        return dict(zip(cls.__slots__, envs[0]))
 
     @property
     def mode(self):
@@ -83,5 +83,9 @@ class ZileanEnvirenement(object):
 
 
 
-def _zileanenvirenements():
+#XXX: @zilean_env_config(function_check=lambda x : x != None)
+def zilean_env_config(function_check=None):
+    def wrap_func(func):
+        def wrap_args(*args, **kwargs):
+            pass
     pass
