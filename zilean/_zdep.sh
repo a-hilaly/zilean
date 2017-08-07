@@ -5,6 +5,7 @@ config_file="$ZILEAN_PATH/zilean/config.json"
 zilean_sys="$ZILEAN_PATH/zilean/zileansys.sql"
 zilean_cache="$ZILEAN_PATH/zilean/zileancache.sql"
 zilean_clear="$ZILEAN_PATH/zilean/zileanclear.sql"
+zilean_temp="$ZILEAN_PATH/zileantemp"
 
 function _extract_from_json () {
     file=$1
@@ -29,11 +30,29 @@ function clear_zilean_mysql_dependencies () {
   $mysql -u $zuser "-p$zpassword" < $zilean_clear
 }
 
+function prepare_mysql_dependencies_migration () {
+  mkdir $zilean_temp
+  touch $zilean_temp/zileanwashere
+}
+
+function copy_dependencies () {
+
+}
+
+function migrate_zilean_dependencies () {
+
+}
+
+
 function zilean_mysql_maker () {
   option=$1
   mode=$2
   if [ "$option" = "make" ]; then
-    make_zilean_mysql_dependencies
+    if [ "$mode" = "--with-db" ]; then
+      echo @
+    elif
+      make_zilean_mysql_dependencies
+    fi
   elif [ "$option" = "remake" ]; then
     clear_zilean_mysql_dependencies
     make_zilean_mysql_dependencies

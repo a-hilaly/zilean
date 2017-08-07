@@ -13,6 +13,7 @@ zilean_cache = "zileancache"
 zilean_intern_fails = "zilean_intern_fails"
 zilean_moves_history = "zilean_moves_history"
 
+
 def new_zilean_move(function, arguments):
     args = JSON_PYSTR(arguments)
     return execute_only(_IE_QUERY(zilean_cache,
@@ -65,13 +66,13 @@ def kargs(*args, **kwargs):
     return list(args) + list(kwargs.values())
 
 
-def zilean_reporter(with_time_limit=None,
-                    on_fail_only=False,
-                    result_checker=lambda x : len(x) != 0,
-                    mysql_record=True,
-                    ping=False,
-                    request=False,
-                    op_dir=None):
+def zilean_manual_reporter(with_time_limit=None,
+                           on_fail_only=False,
+                           result_checker=lambda x : len(x) != 0,
+                           mysql_record=True,
+                           ping=False,
+                           request=False,
+                           op_dir=None):
     #FIXME: Maybe there is a better way to do all this ?
     #       Mmmmmmmmmmmmmayyybeeeee
     def wrap_func(func):
@@ -112,11 +113,11 @@ def zilean_reporter(with_time_limit=None,
             else:
                 raise Exception("Not Implmented")
 
-
-
-
-
-
-
         return wrap_args
     return wrap_func
+
+def zilean_env_config():
+    def wrap_func(func):
+        def wrap_args(*args, **kwargs):
+            pass
+    pass
