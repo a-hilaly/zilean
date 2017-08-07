@@ -2,6 +2,7 @@ from .mysql_query import (_IE_QUERY,
                           JSON_PYSTR,
                           _SELECT_OPTI,
                           _UE_QUERY)
+from zilean.sys.models.zilean_rtype import ZileanOP
 from .mysql_access import (execute_only,
                            execute_and_fetch)
 
@@ -37,8 +38,20 @@ def update_last_move(out_put, success):
                                   1,
                                   sets), commit=True)
 
-def record_zilean_fail(function, error_id, arguments, _type="intern", move_id=None):
-    pass
+def record_zilean_fail(move_id, function, arguments, error_id=None, _type="intern",):
+    args = JSON_PYSTR(arguments)
+    if error_id:
+        return execute_only(_IE_QUERY(zilean_cache,
+                                      zilean_intern_fails,
+                                      move_id=move_id,
+                                      type=_type,
+                                      function=function,
+                                      error_id=error_id), commit=True)
+    return execute_only(_IE_QUERY(zilean_cache,
+                                  zilean_intern_fails,
+                                  move_id=move_id,
+                                  type=_type,
+                                  function=function), commit=True)
 
 def utils_fails_report():
     """
@@ -49,15 +62,61 @@ def utils_fails_report():
     pass
 
 
-def zilean_reporter(intern=True,
-                    only_if_fails=False,
-                    raise_on_warnings=False,
-                    zilean_type=False,
-                    ping=False,
-                    redirect=None):
+def kargs(*args, **kwargs):
+    return list(args) + list(kwargs.values())
 
+def zilean_reporter(with_time_limit=None,
+                    on_fail_only=False,
+                    result_checker=lambda x : len(x) != 0,
+                    mysql_record=True,
+                    ping=False,
+                    request=False,
+                    op_dir=None):
+    #FIXME: Maybe there is a better way to do all this ?
+    #       Mmmmmmmmmmmmmayyybeeeee
     def wrap_func(func):
         def wrap_args(*args, **kwargs):
-            pass
+            function_name = func.__name__
+            arguments = kargs(*args, **kwargs)
+            if mysql_record:
+                if not on_fail_only:
+                    new_zilean_move(function_name, arguments)
+                    mv_id = get_last_move_id()
+                    try:
+                        res = function(*args, **kwargs)
+                    except:
+                        record_zilean_fail(mv_id,
+                                           function_name,
+                                           arguments)
+                        return -1
+                    if isinstance(res, ZileanOP):
+                        if res.status > -9000:
+                            update_last_move(res.result, 0)
+                            record_zilean_fail(mv_id,
+                                               function_name,
+                                               arguments,
+                                               error_id=res.status)
+                        else:
+                            update_last_move(res.result, 1)
+                    else:
+                        if not result_checker(res):
+                            update_last_move(res, 0)
+                            record_zilean_fail(mv_id,
+                                               function_name,
+                                               arguments,
+                                               error_id=-5000)
+                        else:
+                            update_last_move(res, 1)
+                else:
+                    raise Exception("Not Implemented")
+            else:
+                raise Exception("Not Implmented")
+
+
+
+
+
+
+
         return wrap_args
     return wrap_func
