@@ -54,7 +54,7 @@ WHERE {3}"""
 _AUTOINCR = "ALTER TABLE {0}.{1} AUTO_INCREMENT = {2};"
 
 def JSON_PYSTR(a, ln=True, dct=False):
-    final = "'[{0}]'"
+    final = "[{0}]"
     sample = '"{0}"'
     res = ""
     if ln:
