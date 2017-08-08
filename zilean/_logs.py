@@ -1,34 +1,12 @@
 import os
-import json
+from greww.utils import ConfParser
+from greww.env import MachineEnvirenement as ME
 
 
-#@report fail too
-
-def get_config_object(config):
-    """
-    Return a Dict type containing keys and items
-    of targeted config
-    ==============================================
-    >>> from zilean._logs import get_logs_object
-    >>> get_logs_object("mysql")
-    { "host" : "localhost", "port" : 22, "user" : "root", "password" : "uehMLMRw"}
-    """
-    try:
-        with open("zilean/config.json", "r") as f:
-            data = json.load(f)
-        all_config = data[0]
-        return all_config[config]
-    except:
-        return -89
+config_file_path = ME.import_var("ZILEAN_MACHINE_CONFIG")
+zilean_config = ConfParser.(config_file_path)
 
 
-def set_config_object(config, dct):
-    """
-    """
-    return -88
-
-ZILEAN_CONFIG = get_config_object("config")
-
-MYSQL_LOGS = get_config_object("mysql")
-
-ZILEAN_SERVICE_CONFIG = get_config_object("service")
+ZILEAN_CONFIG = zilean_config["zilean.config"]
+MYSQL_LOGS = zilean_config["mysql.logs"]
+MYSQL_CONFIG = zilean_config["mysql.config"]

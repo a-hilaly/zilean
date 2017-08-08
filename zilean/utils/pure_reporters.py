@@ -112,6 +112,5 @@ def zilean_manual_reporter(with_time_limit=None,
                     raise Exception("Not Implemented")
             else:
                 raise Exception("Not Implmented")
-
         return wrap_args
     return wrap_func

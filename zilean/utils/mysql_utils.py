@@ -2,7 +2,8 @@ from __future__ import print_function
 from zilean.utils.mysql_access import (execute_only,
                                        execute_and_fetch)
 from zilean.sys.models.zilean_rtype import _refetch_filter
-from .mysql_query import (_SHOW_DATABASES,
+from .mysql_query import (_USE_DATABASE,
+                          _SHOW_DATABASES,
                           _CREATE_DATABASE,
                           _DELETE_DATABASE,
                           _SHOW_TABLES,
@@ -49,6 +50,11 @@ def remove_database(dbname):
     >>>
     """
     return execute_only(_DELETE_DATABASE.format(dbname))
+
+def use_database(dbname):
+    """
+    """
+    return execute_only(_USE_DATABASE.format(dbname))
 
 @_refetch_filter([0])
 def tables(dbname):

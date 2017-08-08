@@ -8,29 +8,30 @@ CREATE DATABASE zileansystem;
 
 USE zileansystem;
 
-CREATE TABLE `zilean_env` (
-  `mode` VARCHAR(25) NOT NULL,
-  `status` enum('active', 'inactive') DEFAULT 'inactive',
-  `working_directory` VARCHAR(50) NOT NULL,
-  `mysql_connector_use_pure` BOOLEAN DEFAULT 1,
-  `recording_sessions` BOOLEAN DEFAULT 1,
-  `recording_pen_history` BOOLEAN DEFAULT 1,
-  `recording_fails` BOOLEAN DEFAULT 1,
-  `max_runtime_before_fail` INT(5) DEFAULT 1000,
-  `recording_db_backups` BOOLEAN DEFAULT 1,
-  `recording_dr_backups` BOOLEAN DEFAULT 1,
-  `default_backup_type` VARCHAR(10) DEFAULT 'default',
-  PRIMARY KEY (`mode`)
+CREATE TABLE `zilean_service` (
+  `service`
+  `state`
+  PRIMARY KEY (`service`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `zilean_env` (`mode`, `status`, `working_directory`)
-VALUES (
-  'zilean_default_mode',
-  'active',
-  'zilean-path-not-implmented'
-);
+CREATE TABLE `zilean_linked_machines` (
+  `machine_id` INT(5) NOT NULL AUTO_INCREMENT,
+  `machine_name` VARCHAR(30) NOT NULL,
+  `owner` VARCHAR(30) DEFAULT "NaN",
+  `alias` JSON DEFAULT '[]'
+  `extra` JSON DEFAULT '{}',
+  `adress` VARCHAR(30) NOT NULL DEFAULT "255.255.255.255",
+  `api` VARCHAR(30) DEFAULT "__localhost__",
+  `authorisation` VARCHAR(30) DEFAULT "UNDEFINED",
+  `front_database` VARCHAR(15) NOT NULL,
+  `backup_directory` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`machine_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `machine_id` AUTO_INCREMENT = 0;
 
 CREATE TABLE `zilean_linked_databases` (
+  `database_id` INT(5) NOT NULL AUTO_INCREMENT,
   `database` VARCHAR(25) NOT NULL,
   `linked_time` timestamp DEFAULT CURRENT_TIMESTAMP,
   `id_backups` JSON,
