@@ -10,7 +10,6 @@ Mysql tool kit and backup manager
 - [3.2.2 - Zilean Pen](#3.2.1---zilean-pen)
 - [3.2.3 - Zilean Backup](1)
 - [3.3 - Zilean Command Line](#3.3---command-line)
-- [3.2.3]
 - [3.4 - Zilean Decorators](#4---zilean-decorators)
 - [3.5 - Zilean Scripts](#5zilean-scripts)
 
