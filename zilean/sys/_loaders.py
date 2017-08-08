@@ -1,6 +1,5 @@
 from zilean.utils.mysql_utils import (table_fields,
                                       select_elements)
-from .models.zilean_rtype import _refetch_filter
 
 zilean_db = "zileansystem"
 zilean_env = "zilean_env"
