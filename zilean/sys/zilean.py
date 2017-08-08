@@ -1,10 +1,7 @@
 
 
-
 def main():
     pass
-
-
 
 def server_access_autorisation(**kwargs):
     pass
