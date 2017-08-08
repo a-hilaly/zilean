@@ -54,14 +54,6 @@ def record_zilean_fail(move_id, function, arguments, error_id=None, _type="inter
                                   type=_type,
                                   function=function), commit=True)
 
-def utils_fails_report():
-    """
-    Not Implemented
-    Build will fail if this decorator is defined here due to
-    import conflicts
-    """
-    pass
-
 def kargs(*args, **kwargs):
     return list(args) + list(kwargs.values())
 
