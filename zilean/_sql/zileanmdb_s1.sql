@@ -4,7 +4,6 @@ BEGIN;
     Assisted database sample
 */
 
-
 CREATE TABLE `machine_registred_moves` (
   `move_id` INT(10) unsigned NOT NULL AUTO_INCREMENT,
   `caller` VARCHAR(30) NOT NULL,
@@ -29,9 +28,5 @@ CREATE TABLE `machine_registred_fails` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `machine_registred_fails` AUTO_INCREMENT = 0;
-
-/*
-
-*/
 
 COMMIT;
