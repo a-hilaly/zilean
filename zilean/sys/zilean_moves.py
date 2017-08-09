@@ -1,8 +1,3 @@
-from .mysql_query import (_IE_QUERY,
-                          JSON_PYSTR,
-                          _SELECT_OPTI,
-                          _UE_QUERY)
-from zilean.sys.models.zilean_rtype import ZileanOP
 from .mysql_access import (execute_only,
                            execute_and_fetch)
 
@@ -28,7 +23,7 @@ def get_last_move_id():
                                                  zilean_moves_history,
                                                  "move_id",
                                                  "DESC",
-                                                 1)).result[0][0]
+                                                 1))
 
 def update_last_move(out_put, success):
     _move_id = get_last_move_id()
@@ -39,20 +34,6 @@ def update_last_move(out_put, success):
                                   1,
                                   sets), commit=True)
 
-def record_zilean_fail(move_id, function, arguments, error_id=None, _type="intern",):
-    args = JSON_PYSTR(arguments)
-    if error_id:
-        return execute_only(_IE_QUERY(zilean_cache,
-                                      zilean_intern_fails,
-                                      move_id=move_id,
-                                      type=_type,
-                                      function=function,
-                                      error_id=error_id), commit=True)
-    return execute_only(_IE_QUERY(zilean_cache,
-                                  zilean_intern_fails,
-                                  move_id=move_id,
-                                  type=_type,
-                                  function=function), commit=True)
 
 def kargs(*args, **kwargs):
     return list(args) + list(kwargs.values())
