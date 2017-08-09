@@ -36,15 +36,10 @@ CREATE TABLE `zilean_registred_machines` (
                 'unkown'
               ) DEFAULT 'unknown',
   `authorisation` VARCHAR(30) DEFAULT "UNDEFINED",
+  `front_database` VARCHAR(30) NOT NULL,
+  `zilean_auto_backup` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`machine_name`)
 )
-
-CREATE TABLE `zilean_linked_machines` (
-  `machine_id` INT(5) NOT NULL AUTO_INCREMENT,
-  `front_database` VARCHAR(15) NOT NULL,
-  `backup_directory` VARCHAR(30) NOT NULL,
-  PRIMARY KEY (`machine_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `machine_id` AUTO_INCREMENT = 0;
 
@@ -53,15 +48,10 @@ CREATE TABLE `zilean_linked_databases` (
   `database` VARCHAR(25) NOT NULL,
   `local` BOOLEAN NOT NULL DEFAULT 0,
   `linked_time` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `id_backups` JSON,
+  `last_backup_id` VARCHAR(30) DEFAULT 'none',
   PRIMARY KEY (`database`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `zilean_linked_directories` (
-  `directory` VARCHAR(40) NOT NULL,
-  `linked_time` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `id_backups` JSON,
-  PRIMARY KEY (`directory`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `zilean_linked_databases` AUTO_INCREMENT = 0;
 
 COMMIT;

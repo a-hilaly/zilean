@@ -1,31 +1,22 @@
 from greww.data import MysqlPen as M
+from .zileansys import ZileanSys
 from ._exceptions import MachineDataError
 
-
-class MachinesData(object):
+class MachinesData(ZileanSys):
 
         __slots__ = ["_data"]
 
-        db = "zileansystem"
         table = "zilean_registred_machines"
         fields = ['machine_id',
                   'machine_name',
                   'owner',
                   'alias',
                   'extra',
-                  'adress'
-                  'type'
-                  'authorisation']
-
-        def __init__(self):
-            self._data = M.table(self.db, self.table)
-
-        def update(self):
-            self.__init__()
-
-        @property
-        def data(self):
-            return self._data
+                  'adress',
+                  'type',
+                  'authorisation',
+                  'front_database',
+                  'zilean_auto_backup']
 
         def isregistred(self, machine_name=None, machine_id=None, alias=None):
             for line in self._data.items():
@@ -37,7 +28,7 @@ class MachinesData(object):
                     return True
             return False
 
-        def machine(self, machine_name=None, machine_id=None, alias=None):
+        def machine_data(self, machine_name=None, machine_id=None, alias=None):
             for line in self._data.items():
                 if machine_id and line[0] == machine_id:
                     return dict(zip(self.fields, line)
@@ -45,7 +36,7 @@ class MachinesData(object):
                     return dict(zip(self.fields, line)
                 elif alias and alias in line[3]:
                     return dict(zip(self.fields, line)
-            raise MachineDataError
+            raise MachineDataError(machine_name, machine_id, alias)
 
         def new_machine(self, **kwargs):
             M.add_element(self.db,
@@ -77,13 +68,13 @@ class MachinesData(object):
         @classmethod
         def _isregistered(cls, **kwargs):
             obj = object.__new__(cls)
-            obj = object.__init__()
+            obj.__init__()
             return obj.isregistred(**kwargs)
 
         @classmethod
-        def _machine(cls, **kwargs):
+        def _machine_data(cls, **kwargs):
             obj = object.__new__(cls)
-            obj = object.__init__()
+            obj.__init__()
             return obj.machine(**kwargs)
 
         @classmethod

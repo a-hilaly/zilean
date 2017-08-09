@@ -6,3 +6,7 @@ class MachineDataError(Exception):
 
 class ServiceDataError(Exception):
     pass
+
+
+class DatabaseDataError(Exception):
+    pass
