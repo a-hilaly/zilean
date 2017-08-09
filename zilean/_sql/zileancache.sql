@@ -8,7 +8,6 @@ CREATE DATABASE zileancache;
 
 USE zileancache;
 
-
 ALTER TABLE `zilean_sessions` AUTO_INCREMENT = 0;
 
 CREATE TABLE `zilean_moves_history` (
@@ -33,10 +32,7 @@ CREATE TABLE `zilean_intern_fails` (
                 'mysql_query',
                 'mysql_conection',
                 'architecture',
-                'outer',
-                'intern2',
                 'unknown',
-                'unclassified'
               ) NOT NULL DEFAULT 'unclassified',
   `recorded_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `function` VARCHAR(30) NOT NULL,
