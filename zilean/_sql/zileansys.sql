@@ -9,12 +9,20 @@ CREATE DATABASE zileansystem;
 USE zileansystem;
 
 CREATE TABLE `zilean_service` (
-  `service`
-  `state`
+  `service` VARCHAR(30) NOT NULL,
+  `state` BOOLEAN NOT NULL DEFAULT 0,
+  `related` JSON DEFAULT '[]',
   PRIMARY KEY (`service`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `zilean_linked_machines` (
+INSERT INTO `zilean_serve`
+  (`service`)
+VALUES
+  ('db_backup'),
+  ('safety_switch'),
+  ('mysql_security');
+
+CREATE TABLE `zilean_registred_machines` (
   `machine_id` INT(5) NOT NULL AUTO_INCREMENT,
   `machine_name` VARCHAR(30) NOT NULL,
   `owner` VARCHAR(30) DEFAULT "NaN",
@@ -23,6 +31,10 @@ CREATE TABLE `zilean_linked_machines` (
   `adress` VARCHAR(30) NOT NULL DEFAULT "255.255.255.255",
   `api` VARCHAR(30) DEFAULT "__localhost__",
   `authorisation` VARCHAR(30) DEFAULT "UNDEFINED",
+)
+
+CREATE TABLE `zilean_linked_machines` (
+  `machine_id` INT(5) NOT NULL AUTO_INCREMENT,
   `front_database` VARCHAR(15) NOT NULL,
   `backup_directory` VARCHAR(30) NOT NULL,
   PRIMARY KEY (`machine_name`)
