@@ -16,6 +16,7 @@ class MachinesData(ZileanSys):
                   'type',
                   'authorisation',
                   'front_database',
+                  'other_databases',
                   'zilean_auto_backup']
 
         def isregistred(self, machine_name=None, machine_id=None, alias=None):

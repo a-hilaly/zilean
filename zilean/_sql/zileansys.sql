@@ -27,7 +27,7 @@ CREATE TABLE `zilean_registred_machines` (
   `owner` VARCHAR(30) DEFAULT "NaN",
   `alias` JSON DEFAULT '[]',
   `extra` JSON DEFAULT '{}',
-  `adress` VARCHAR(30),
+  `adress` VARCHAR(30) NOT NULL DEFAULT '__local__',
   `type` enum(
                 'intern',
                 'local',
@@ -37,6 +37,7 @@ CREATE TABLE `zilean_registred_machines` (
               ) DEFAULT 'unknown',
   `authorisation` VARCHAR(30) DEFAULT "UNDEFINED",
   `front_database` VARCHAR(30) NOT NULL,
+  `other_databases` JSON,
   `zilean_auto_backup` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`machine_name`)
 )

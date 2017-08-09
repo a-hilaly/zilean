@@ -17,17 +17,17 @@ function backupzilean_mysql () {
 }
 
 function zilean_mysql_frombackup () {
-    sysbackup=$1
-    cachebackup=$2
+    sysbackup="$1"
+    cachebackup="$2"
     mysql_read $sysbackup
     mysql_read $cachebackup
 }
 
 function zilean_mysql_maker () {
-    option=$1
-    mode=$2
-    bu1=$3
-    bu2=$4
+    option="$1"
+    mode="$2"
+    bu1="$3"
+    bu2="$4"
     if [ "$option" = "make" ]; then
         make_zilean_mysql
     if [ "$mode" = "--with-bu" ]; then
@@ -44,6 +44,49 @@ function zilean_mysql_maker () {
     elif [ "$option" = "clear" ]; then
         clear_zilean_mysql
     fi
+}
+
+#################################################################
+
+function zilean_machines_maker () {
+    db=""
+    wfails="false"
+    wmoves="false"
+    wperformance="false"
+    wtraffic="false"
+    while [[ $# -gt 1 ]]; do
+        key="$1"
+        case $key in
+        -d | --database )
+        db=$2
+        shift
+        ;;
+        -f | --with-fails )
+        wfails="true"
+        ;;
+        -m | --with-moves )
+        wmoves="true"
+        ;;
+        -p | --with-performance )
+        wperformance="true"
+        ;;
+        -t | --traffic )
+        wtraffic="true"
+        ;;
+        esac
+        shift
+    done
+
+    if [ "$wfails" = "true"]; then
+        mysql_read $zileanmdb_fails $db
+    elif [ "$wmoves" = "true" ]; then
+        mysql_read $zileanmdb_moves $db
+    elif [ "$wtraffic" = "true" ]; then
+        mysql_read $zileanmdb_traffic $db
+    elif [ "$wperformance" = "true" ]; then
+        mysql_read $zileanmdb_performances $db
+    fi
+
 }
 
 $@
