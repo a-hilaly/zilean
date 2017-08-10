@@ -27,11 +27,11 @@ ALTER TABLE `zilean_moves_history` AUTO_INCREMENT = 0;
 
 CREATE TABLE `zilean_backups_history` (
   `backup_id` INT(8) unsigned  NOT NULL AUTO_INCREMENT,
-  `targeted_databases` VARCHAR(30) NOT NULL,
-  `started_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `finished_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `exit_status` INT(5) NOT NULL DEFAULT -9999,
+  `database` VARCHAR(30) NOT NULL,
+  `timed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `working_directory` VARCHAR(50) NOT NULL,
+  `run_time` INT(15),
+  `success` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`backup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -39,11 +39,10 @@ ALTER TABLE `zilean_database_backups` AUTO_INCREMENT = 0;
 
 CREATE TABLE `zilean_migration_history` (
   `migration_id` INT(8) unsigned NOT NULL AUTO_INCREMENT,
-  `target_database` VARCHAR(30) NOT NULL,
-  `started_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `finished_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `exit_status` INT(5) NOT NULL DEFAULT -9999,
+  `targeted_database` VARCHAR(30) NOT NULL,
+  `timed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `working_directory` VARCHAR(50) NOT NULL,
+  `success` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`backup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

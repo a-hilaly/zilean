@@ -1,7 +1,7 @@
 BEGIN;
 
 /*
-    Machine moves
+    Machine Registred Moves
 */
 
 CREATE TABLE `machine_registred_moves` (

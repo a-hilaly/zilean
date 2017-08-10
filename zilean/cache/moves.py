@@ -2,15 +2,6 @@ import time
 from greww.data import MysqlPen as M
 from .zileancache import ZileanCache
 
-
-def new_zilean_move(function, arguments):
-    args = JSON_PYSTR(arguments)
-    return execute_only(_IE_QUERY(zilean_cache,
-                        zilean_moves_history,
-                        function=function,
-                        arguments=args), commit=True)
-
-
 class ZileanMoves(ZileanCache):
 
     __slots__ = ["_data"]
@@ -49,12 +40,14 @@ class ZileanMoves(ZileanCache):
         obj = object.__new__(cls)
         obj.register_move(*args, **kwargs)
 
-
 def cachemove(module=None, _class=None):
+    """
+    Decorator to zilean intern function except .zileancache
+    """
     def wrap_func(func):
         def wrap_args(*args, **kwargs):
+            t1 = time.time()
             try:
-                t1 = time.time()
                 res = func(*args, **kwargs)
                 t2 = time.time()
                 ZileanMoves.register_move(module=module,
@@ -69,6 +62,7 @@ def cachemove(module=None, _class=None):
                                           _class=_class,
                                           func=func.__name__,
                                           args=args,
+                                          run_time=t2-t1,
                                           success=0)
         return wrap_args
     return wrap_func
