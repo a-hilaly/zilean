@@ -1,4 +1,4 @@
-
+# Mysql Logs Generator
 
 
 def gmcc():

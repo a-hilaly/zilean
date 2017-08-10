@@ -3,7 +3,7 @@
 source $ZILEAN_SQL/_mysqltools.sh
 
 function make_zilean_mysql () {
-  mysql_read $zuser "-p$zpassword" < $zilean_cache
+  mysql_read $zilean_cache
   mysql_read $zilean_sys
 }
 
@@ -50,7 +50,7 @@ function zilean_mysql_maker () {
 
 #################################################################
 
-function zilean_machines_maker () {
+function db_machines_maker () {
     db=""
     wfails="false"
     wmoves="false"
@@ -81,11 +81,14 @@ function zilean_machines_maker () {
 
     if [ "$wfails" = "true"]; then
         mysql_read $zileanmdb_fails $db
-    elif [ "$wmoves" = "true" ]; then
+    fi
+    if [ "$wmoves" = "true" ]; then
         mysql_read $zileanmdb_moves $db
-    elif [ "$wtraffic" = "true" ]; then
+    fi
+    if [ "$wtraffic" = "true" ]; then
         mysql_read $zileanmdb_traffic $db
-    elif [ "$wperformance" = "true" ]; then
+    fi
+    if [ "$wperformance" = "true" ]; then
         mysql_read $zileanmdb_performances $db
     fi
 

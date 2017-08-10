@@ -1,6 +1,9 @@
 
 
 class ZileanSys(object):
+    """
+    Zilean System Tables Data Extraction
+    """
 
     __slots__ = ["_data"]
 
@@ -17,3 +20,7 @@ class ZileanSys(object):
     @property
     def data(self):
         return self._data
+
+    @classmethod
+    def _quantify(cls, line):
+        return dict(zip(self.fields, line))
