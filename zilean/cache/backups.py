@@ -17,12 +17,14 @@ class ZileanBackups(ZileanCache):
     def register_backup(self,
                         db=None,
                         workingdir=None,
+                        backupfile=None
                         run_time=None,
                         success=None):
         M.add_element(self.db,
                       self.table,
                       database=db,
                       working_directory=workingdir,
+                      backup_file=backupfile,
                       run_time=run_time,
                       success=success)
 

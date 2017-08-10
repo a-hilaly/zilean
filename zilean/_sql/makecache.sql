@@ -30,18 +30,20 @@ CREATE TABLE `zilean_backups_history` (
   `database` VARCHAR(30) NOT NULL,
   `timed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `working_directory` VARCHAR(50) NOT NULL,
+  `backup_file` VARCHAR(30) NOT NULL,
   `run_time` INT(15),
   `success` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`backup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-ALTER TABLE `zilean_database_backups` AUTO_INCREMENT = 0;
+ALTER TABLE `zilean_backups_history` AUTO_INCREMENT = 0;
 
 CREATE TABLE `zilean_migration_history` (
   `migration_id` INT(8) unsigned NOT NULL AUTO_INCREMENT,
-  `targeted_database` VARCHAR(30) NOT NULL,
+  `database` VARCHAR(30) NOT NULL,
   `timed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `working_directory` VARCHAR(50) NOT NULL,
+  `backup_file` VARCHAR(50) NOT NULL,
+  `run_time` INT(15),
   `success` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`backup_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
