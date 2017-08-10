@@ -12,38 +12,18 @@ ALTER TABLE `zilean_sessions` AUTO_INCREMENT = 0;
 
 CREATE TABLE `zilean_moves_history` (
   `move_id` INT(10) unsigned NOT NULL AUTO_INCREMENT,
-  `started_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `finished_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `timed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `module` VARCHAR(25) NOT NULL,
+  `class` VARCHAR(25),
   `function` VARCHAR(25) NOT NULL,
   `arguments` JSON,
   `out_put` JSON,
-  `success` BOOLEAN DEFAULT 0,
+  `run_time` INT(15),
+  `success` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`move_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `zilean_moves_history` AUTO_INCREMENT = 0;
-
-CREATE TABLE `zilean_intern_fails` (
-  `fail_id` INT(10) unsigned NOT NULL AUTO_INCREMENT,
-  `move_id`INT(10) unsigned NOT NULL,
-  `type` enum(
-                'logs',
-                'config',
-                'mysql_query',
-                'mysql_conection',
-                'architecture',
-                'unknown',
-              ) NOT NULL DEFAULT 'unclassified',
-  `recorded_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `function` VARCHAR(30) NOT NULL,
-  `module` VARCHAR(20) NOT NULL,
-  `error_id` INT(5),
-  `related_fails` JSON,
-  `ocuracy` INT(4),
-  PRIMARY KEY (`fail_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-ALTER TABLE `zilean_intern_fails` AUTO_INCREMENT = 0;
 
 CREATE TABLE `zilean_backups_history` (
   `backup_id` INT(8) unsigned  NOT NULL AUTO_INCREMENT,

@@ -1,13 +1,13 @@
 
 
-class ZileanSys(object):
+class ZileanCache(object):
     """
-    Zilean System Tables Data Manipulation
+    Zilean Cache Tables Data Manipulation
     """
 
     __slots__ = ["_data"]
 
-    db = "zileansys"
+    db = "zileancache"
     table = ""
     fields = []
 

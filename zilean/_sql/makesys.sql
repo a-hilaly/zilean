@@ -33,7 +33,7 @@ CREATE TABLE `zilean_registred_machines` (
                 'local',
                 'virtual',
                 'hard',
-                'unkown'
+                'unknown'
               ) DEFAULT 'unknown',
   `authorisation` VARCHAR(30) DEFAULT "UNDEFINED",
   `front_database` VARCHAR(30) NOT NULL,

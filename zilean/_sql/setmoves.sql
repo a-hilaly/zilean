@@ -7,11 +7,12 @@ BEGIN;
 CREATE TABLE `machine_registred_moves` (
   `move_id` INT(10) unsigned NOT NULL AUTO_INCREMENT,
   `caller` VARCHAR(30) NOT NULL,
-  `called_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `timed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `function` VARCHAR(30) NOT NULL,
   `arguments` JSON,
   `out_put` JSON,
-  `success` BOOLEAN NOT NULL DEFAULT 1;
+  `run_time` INT(15),
+  `success` BOOLEAN NOT NULL DEFAULT 1,
   PRIMARY KEY (`move_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
