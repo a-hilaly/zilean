@@ -2,7 +2,7 @@
 
 ZILEAN_PATH="$HOME/zilean"
 ZILEAN_SQL="$ZILEAN_PATH/zilean/zilean/_sql"
-ZILEAN_WORKING_DIR="$HOME/zileanwork"
+ZILEAN_WORKING_DIR="$HOME/work/zilean"
 #XXX: the next line should be already exported at the machine
 # creation
 #MACHINE_CONFIG = "$HOME/zilean-machine.ini"

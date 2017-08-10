@@ -7,13 +7,11 @@ class HardMachineDB(object):
     pass
 
 
-
 class VirtualMachineDB(object):
     """
     Vitual Machine Database Management
     """
     pass
-
 
 
 class InternDatabase(object):
