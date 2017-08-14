@@ -3,9 +3,9 @@
 Mysql tool kit and backup manager
 
 
-[![CircleCI](https://circleci.com/gh/iallabs/zilean-machine/tree/master.svg?style=svg&circle-token=f3d193e37ae25eb26cc445151abea74239fdc2a7)](https://circleci.com/gh/iallabs/zilean-machine/tree/master)
-[![Test Coverage](https://codeclimate.com/github/ooade/NextSimpleStarter/badges/coverage.svg)](https://codeclimate.com/github/ooade/NextSimpleStarter/coverage)
-[![Issue Count](https://codeclimate.com/github/ooade/NextSimpleStarter/badges/issue_count.svg)](https://codeclimate.com/github/ooade/NextSimpleStarter)
+| TravisCI | CircleCI | CodeClimate |
+| --- | --- | --- |
+| [![Build Status](https://travis-ci.com/iallabs/zilean-machine.svg?token=qsqoiH3xhBi1WyATcy2m&branch=master)](https://travis-ci.com/iallabs/zilean-machine) | [![CircleCI](https://circleci.com/gh/iallabs/zilean-machine/tree/master.svg?style=svg&circle-token=f3d193e37ae25eb26cc445151abea74239fdc2a7)](https://circleci.com/gh/iallabs/zilean-machine/tree/master) | [![Test Coverage](https://codeclimate.com/github/ooade/NextSimpleStarter/badges/coverage.svg)](https://codeclimate.com/github/ooade/NextSimpleStarter/coverage) [![Issue Count](https://codeclimate.com/github/ooade/NextSimpleStarter/badges/issue_count.svg)](https://codeclimate.com/github/ooade/NextSimpleStarter)
 
 #
 
