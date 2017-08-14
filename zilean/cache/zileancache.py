@@ -1,5 +1,3 @@
-
-
 class ZileanCache(object):
     """
     Zilean Cache Tables Data Manipulation

@@ -1,7 +1,7 @@
 from greww.data import MysqlPen as M
 from .zileansys import ZileanSys
 from ._exceptions import ServiceDataError
-
+from zilean.cache import zileanmoves
 
 
 class ServiceData(ZileanSys):
@@ -11,18 +11,21 @@ class ServiceData(ZileanSys):
     table = "zilean_service"
     fields = ['service', 'status']
 
+    @zileanmoves(__file__, ServiceData)
     def isiservice(self, srvc):
         for service, state in self._data.items():
             if service == srvc:
                 return True
         retrun False
 
+    @zileanmoves(__file__, ServiceData)
     def service_status(self, srvc):
         for service, state in self._data.items():
             if service == srvc:
                 return state
         raise ServiceDataError(srvc)
 
+    @zileanmoves(__file__, ServiceData)
     def switch_service_status(self, srvc, status=None):
         for service, state in self._data.items():
             if service == srvc:
@@ -38,11 +41,13 @@ class ServiceData(ZileanSys):
                                  sets=sets)
         raise ServiceDataError(srvc)
 
+    @zileanmoves(__file__, ServiceData)
     def new_service(self, service):
         M.add_element(self.db,
                       self.table,
                       service=service)
 
+    @zileanmoves(__file__, ServiceData)
     def delete_service(self, service):
         M.remove_elements(self.db,
                           self.table,

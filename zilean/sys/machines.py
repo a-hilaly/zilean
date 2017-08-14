@@ -1,6 +1,7 @@
 from greww.data import MysqlPen as M
 from .zileansys import ZileanSys
 from ._exceptions import MachineDataError
+from zilean.cache import zileanmoves
 
 class MachinesData(ZileanSys):
 
@@ -19,6 +20,7 @@ class MachinesData(ZileanSys):
                   'other_databases',
                   'zilean_auto_backup']
 
+        @zileanmoves(__file__, MachinesData)
         def isregistred(self, machine_name=None, machine_id=None, alias=None):
             for line in self._data.items():
                 if machine_id and line[0] == machine_id:
@@ -29,6 +31,7 @@ class MachinesData(ZileanSys):
                     return True
             return False
 
+        @zileanmoves(__file__, MachinesData)
         def machine_data(self, machine_name=None, machine_id=None, alias=None):
             for line in self._data.items():
                 if machine_id and line[0] == machine_id:
@@ -39,11 +42,13 @@ class MachinesData(ZileanSys):
                     return dict(zip(self.fields, line)
             raise MachineDataError(machine_name, machine_id, alias)
 
+        @zileanmoves(__file__, MachinesData)
         def new_machine(self, **kwargs):
             M.add_element(self.db,
                           self.table,
                           **kwargs)
 
+        @zileanmoves(__file__, MachinesData)
         def delete_machine(self, machine_name=None, machine_id=None):
             if machine_id:
                 M.remove_elements(self.db,
@@ -53,7 +58,9 @@ class MachinesData(ZileanSys):
                 M.remove_elements(self.db,
                                   self.table,
                                   where="machine_name = '{0}".format(machine_name))
+            self.upgrade
 
+        @zileanmoves(__file__, MachinesData)
         def set_machine_data(self, machine_name=None, machine_id=None, config=None, value=None):
             if machine_name:
                 M.update_element(self.db,
@@ -83,10 +90,12 @@ class MachinesData(ZileanSys):
             obj = object.__new__(cls)
             obj.new_machine(**kwargs)
 
+        @classmethod
         def _delete_machine(self, **kwargs):
             obj = object.__new__(cls)
             obj.delete_machine(**kwargs)
 
+        @classmethod
         def _set_machine_data(cls, **kwargs):
             obj = object.__new__(cls)
             obj.set_machine_data(**kwargs)

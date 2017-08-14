@@ -13,7 +13,7 @@ class ZileanMigrations(ZileanCache):
               'working_directory',
               "success"]
 
-    @cachemove(__file__, ZileanBackups.__name__)
+    @cachemove(__file__, ZileanMigrations)
     def register_migration(self,
                            db=None,
                            backupfile=None,

@@ -1,6 +1,7 @@
 from greww.data import MysqlPen as M
 from ._exceptions import DatabaseDataError
 from .zileansys import ZileanSys
+from zilean.cache import ZileanMoves
 
 class LinkedDatabasesData(ZileanSys):
 
@@ -13,18 +14,21 @@ class LinkedDatabasesData(ZileanSys):
               'linked_time',
               'last_backup_id']
 
+    @zileanmoves(__file__, LinkedDatabasesData)
     def islinked(self, db):
         for line in self._data:
             if line[1] == db:
                 return True
         return False
 
+    @zileanmoves(__file__, LinkedDatabasesData)
     def database_data(self, db):
         for line in self.data:
             if line[1] == db:
                 return line
         raise DatabaseDataError(db)
 
+    @zileanmoves(__file__, LinkedDatabasesData)
     def link_database(self, db, local=True):
         l = 1 is local else 0
         M.add_element(self.db,
@@ -32,6 +36,7 @@ class LinkedDatabasesData(ZileanSys):
                       database=db,
                       local=l)
 
+    @zileanmoves(__file__, LinkedDatabasesData)
     def delink_database(self, db):
         M.remove_elements(self.db,
                           self.table,

@@ -1,5 +1,3 @@
-
-
 class ZileanSys(object):
     """
     Zilean System Tables Data Manipulation
