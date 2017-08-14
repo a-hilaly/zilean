@@ -4,6 +4,7 @@ class ZileanCache(object):
     """
     Zilean Cache Tables
     """
+
     __slots__ = ["_data"]
 
     db = "zileancache"

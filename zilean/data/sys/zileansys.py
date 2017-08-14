@@ -8,3 +8,5 @@ class ZileanSys(BasicTable):
     __slots__ = ["_data"]
 
     db = "zileansys"
+    table = ""
+    fields = []
