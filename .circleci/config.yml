@@ -2,10 +2,6 @@
 #
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
-<<<<<<< HEAD
-=======
-#
->>>>>>> origin/zilean-dev
 version: 2
 jobs:
   build:
