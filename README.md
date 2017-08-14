@@ -1,6 +1,5 @@
 # Zilean
-
-Mysql tool kit and backup manager
+mysql-server management : backups, security, partition, dev support
 
 
 | TravisCI | CircleCI | CodeClimate |
