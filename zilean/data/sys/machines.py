@@ -1,7 +1,7 @@
 from greww.data import MysqlPen as M
 from .zileansys import ZileanSys
 from ._exceptions import MachineDataError
-from zilean.cache import zileanmoves
+from zilean.data.cache import zileanmoves
 
 class MachinesData(ZileanSys):
 

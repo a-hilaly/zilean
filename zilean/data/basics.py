@@ -1,11 +1,11 @@
-class ZileanCache(object):
+class BasicTable(object):
     """
-    Zilean Cache Tables Data Manipulation
+    Basic Table Modelisation Sample
     """
 
     __slots__ = ["_data"]
 
-    db = "zileancache"
+    db = ""
     table = ""
     fields = []
 

@@ -1,7 +1,7 @@
 from greww.data import MysqlPen as M
 from ._exceptions import DatabaseDataError
 from .zileansys import ZileanSys
-from zilean.cache import ZileanMoves
+from zilean.data.cache import ZileanMoves
 
 class LinkedDatabasesData(ZileanSys):
 
