@@ -17,6 +17,7 @@ class ZileanMoves(ZileanCache):
               "run_time",
               "success"]
 
+    @cachemove(__file__, ZileanMoves)
     def register_move(self,
                       module=None,
                       _class=None,
@@ -51,15 +52,16 @@ def cachemove(module=None, _class=None):
                 res = func(*args, **kwargs)
                 t2 = time.time()
                 ZileanMoves.register_move(module=module,
-                                          _class=_class,
+                                          _class=_class.__name__,
                                           func=func.__name__,
                                           args=args,
                                           out_put=res,
                                           run_time=t2-t1,
                                           success=1)
             except:
+                t2 = time.time()
                 ZileanMoves.register_move(module=module,
-                                          _class=_class,
+                                          _class=_class.__name__,
                                           func=func.__name__,
                                           args=args,
                                           run_time=t2-t1,
