@@ -1,5 +1,6 @@
 from greww.data import MysqlPen as M
-from .zileansys import ZileanSys
+from greww.filters import refetch_filter
+from zilean.data.basics import ZileanCache
 from ._exceptions import MachineDataError
 from zilean.data.cache import zileanmoves
 
@@ -19,6 +20,12 @@ class MachinesData(ZileanSys):
                   'front_database',
                   'other_databases',
                   'zilean_auto_backup']
+
+        @refetch_filter([1])
+        @zileanmoves(__file__, MachinesData):
+        @property
+        def machines(self):
+            return self.data
 
         @zileanmoves(__file__, MachinesData)
         def isregistred(self, machine_name=None, machine_id=None, alias=None):
@@ -72,6 +79,12 @@ class MachinesData(ZileanSys):
                                  self.table,
                                  where="machine_id = '{0}".format(machine_id),
                                  sets="{0} = {1}")
+
+        @classmethod
+        def _machines(cls):
+            obj = object.__new__(cls)
+            obj.__init__()
+            return obj.machines
 
         @classmethod
         def _isregistered(cls, **kwargs):
