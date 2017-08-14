@@ -21,16 +21,15 @@ jobs:
       - checkout
 
       - predem8888888:
-          command:
-          - >
-          export DEBIAN_FRONTEND=noninteractive
-          && sudo apt-get -y remove mysql-server && sudo apt-get -y autoremove
-          && sudo apt-get -y install software-properties-common
-          && sudo apt-add-repository -y 'deb http://ppa.launchpad.net/ondrej/mysql-experimental/ubuntu precise main'
-          && sudo apt-get update
-          && sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password "uehMLMRw"'
-          && sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password "uehMLMRw"'
-          && sudo apt-get -y install mysql-server
+          command: |
+            export DEBIAN_FRONTEND=noninteractive
+            && sudo apt-get -y remove mysql-server && sudo apt-get -y autoremove
+            && sudo apt-get -y install software-properties-common
+            && sudo apt-add-repository -y 'deb http://ppa.launchpad.net/ondrej/mysql-experimental/ubuntu precise main'
+            && sudo apt-get update
+            && sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password "uehMLMRw"'
+            && sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password "uehMLMRw"'
+            && sudo apt-get -y install mysql-server
 
       # Download and cache dependencies
       - restore_cache:
