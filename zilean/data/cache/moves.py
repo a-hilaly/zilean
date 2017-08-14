@@ -1,6 +1,6 @@
 import time
 from greww.data import MysqlPen as M
-from .zileancache import ZileanCache
+from zilean.data.basics import ZileanCache
 
 class ZileanMoves(ZileanCache):
 

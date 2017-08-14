@@ -42,3 +42,27 @@ class BasicTable(object):
         =====================================================
         """
         return dict(zip(self.fields, line))
+
+
+class ZileanCache(object):
+    """
+    Zilean Cache Tables
+    """
+
+    __slots__ = ["_data"]
+
+    db = "zileancache"
+    table = ""
+    fields = []
+
+
+class ZileanSys(BasicTable):
+    """
+    Zilean System Tables
+    """
+
+    __slots__ = ["_data"]
+
+    db = "zileansys"
+    table = ""
+    fields = []
