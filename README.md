@@ -1,6 +1,11 @@
 # Zilean
 Mysql tool kit and backup manager
 
+| Build | Coverage | Issues |
+| --- | --- | --- |
+| [![CircleCI](https://circleci.com/gh/iallabs/zilean-machine/tree/master.svg?style=svg)](https://circleci.com/gh/iallabs/zilean-machine/tree/master) | [![Test Coverage](https://codeclimate.com/github/ooade/NextSimpleStarter/badges/coverage.svg)](https://codeclimate.com/github/ooade/NextSimpleStarter/coverage) | [![Issue Count](https://codeclimate.com/github/ooade/NextSimpleStarter/badges/issue_count.svg)](https://codeclimate.com/github/ooade/NextSimpleStarter) |
+
+
 - [1 - Getting Zilean](#1---getting-zilean)
 - [2 - Setup](#2---setup)
 - [3 - Documentation](#3---documentation)

@@ -1,3 +1,4 @@
+import time
 from greww.data import MysqlPen
 from .zileancache import ZileanCache
 from .moves import cachemove
@@ -13,7 +14,7 @@ class ZileanMigrations(ZileanCache):
               'working_directory',
               "success"]
 
-    @cachemove(__file__, ZileanBackups.__name__)
+    @cachemove(__file__, ZileanMigrations)
     def register_migration(self,
                            db=None,
                            backupfile=None,
@@ -27,7 +28,23 @@ class ZileanMigrations(ZileanCache):
                       success=success)
 
     @classmethod
-    def _register_backup(cls, *args, **kwargs):
+    def _register_migration(cls, *args, **kwargs):
         obj = object.__new__(cls)
         obj.__init__()
-        obj.register_move(*args, **kwargs)
+        obj.register_migration(*args, **kwargs)
+
+
+def cachemigration(func):
+    def wrap_args(*args, **kwargs):
+        t1 = time.time()
+        try:
+            res = func(*args, **kwargs)
+            t2 = time.time()
+            ZileanMigrations._register_migration(**self._filter_kwargs(**kwargs),
+                                                 run_time=t2-t1,
+                                                 success=1)
+        except:
+            ZileanMigrations._register_migration(**self._filter_kwargs(**kwargs),
+                                                 run_time=t2-t1,
+                                                 success=0)
+    return wrap_args

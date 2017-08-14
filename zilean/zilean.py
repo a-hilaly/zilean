@@ -11,6 +11,8 @@ def server_access_autorisation(**kwargs):
 def make_server_partition(**kwargs):
     pass
 
+def add_server_partition(**kwargs):
+    pass
 
 def remove_server_partition(**kwargs):
     pass
