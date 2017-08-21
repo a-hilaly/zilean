@@ -35,9 +35,9 @@ CREATE TABLE `zilean_registred_machines` (
                 'hard',
                 'unknown'
               ) DEFAULT 'unknown',
-  `authorisation` VARCHAR(30) DEFAULT "UNDEFINED",
   `front_database` VARCHAR(30) NOT NULL,
   `other_databases` JSON,
+  `authorisation` VARCHAR(30) DEFAULT "UNDEFINED",
   `zilean_auto_backup` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`machine_name`)
 )

@@ -16,9 +16,9 @@ class MachinesData(ZileanSys):
                   'extra',
                   'adress',
                   'type',
-                  'authorisation',
                   'front_database',
                   'other_databases',
+                  'authorisation',
                   'zilean_auto_backup']
 
         @refetch_filter([1])
