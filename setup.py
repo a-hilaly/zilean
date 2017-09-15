@@ -16,6 +16,7 @@ setup(
     long_description=readme,
     author='Imp Alpha lab',
     author_email='hilalyamine@gmail.com',
+    url='',
     license=license,
     packages=find_packages(exclude=('tests', 'docs'))
 )
