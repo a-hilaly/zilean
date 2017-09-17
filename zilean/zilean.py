@@ -1,6 +1,3 @@
-def main():
-    pass
-
 
 def authorize_adress_user(**kwargs):
     pass
@@ -24,7 +21,3 @@ def backup_server_partition(**kwargs):
 
 def create_backup_server_partition(**kwargs):
     pass
-
-
-if __name__ == "__main__":
-    main()

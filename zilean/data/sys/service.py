@@ -1,7 +1,10 @@
 from greww.data import MysqlPen as M
 from zilean.data.basics import ZileanCache
-from ._exceptions import ServiceDataError
 from zilean.data.cache import zileanmoves
+
+
+class ServiceDataError(Exception):
+    pass
 
 
 class ServiceData(ZileanSys):

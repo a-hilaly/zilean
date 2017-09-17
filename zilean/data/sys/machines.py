@@ -1,8 +1,12 @@
 from greww.data import MysqlPen as M
-from greww.filters import refetch_filter
+from greww.utils.filters import refetch_filter
 from zilean.data.basics import ZileanCache
-from ._exceptions import MachineDataError
 from zilean.data.cache import zileanmoves
+
+
+class MachineDataError(Exception):
+    pass
+
 
 class MachinesData(ZileanSys):
 

@@ -1,7 +1,10 @@
 from greww.data import MysqlPen as M
-from ._exceptions import DatabaseDataError
 from zilean.data.basics import ZileanCache
 from zilean.data.cache import ZileanMoves
+
+class DatabaseDataError(Exception):
+    pass
+
 
 class LinkedDatabasesData(ZileanSys):
 
