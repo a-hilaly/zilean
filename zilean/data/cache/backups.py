@@ -18,7 +18,7 @@ class ZileanBackups(ZileanCache):
     def register_backup(self,
                         db=None,
                         workingdir=None,
-                        backupfile=None
+                        backupfile=None,
                         run_time=None,
                         success=None):
         M.add_element(self.db,

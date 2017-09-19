@@ -5,7 +5,6 @@ from zilean.data.cache import ZileanMoves
 class DatabaseDataError(Exception):
     pass
 
-
 class LinkedDatabasesData(ZileanSys):
 
     __slots__ = ["data"]
@@ -33,7 +32,7 @@ class LinkedDatabasesData(ZileanSys):
 
     @zileanmoves(__file__, LinkedDatabasesData)
     def link_database(self, db, local=True):
-        l = 1 is local else 0
+        l = 1 if local else 0
         M.add_element(self.db,
                       self.table,
                       database=db,

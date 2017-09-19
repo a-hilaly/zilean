@@ -19,7 +19,7 @@ class ServiceData(ZileanSys):
         for service, state in self._data.items():
             if service == srvc:
                 return True
-        retrun False
+        return False
 
     @zileanmoves(__file__, ServiceData)
     def service_status(self, srvc):
@@ -35,12 +35,12 @@ class ServiceData(ZileanSys):
                 if status:
                     ns = status
                 else:
-                    ns = 0 if state = 1 else 1
+                    ns = 0 if (state == 1) else 1
                 sets = "status = {0}".format(ns)
                 where = "service = '{0}'".format(service)
                 M.update_element(self.db,
                                  self.table,
-                                 where=where
+                                 where=where,
                                  sets=sets)
         raise ServiceDataError(srvc)
 

@@ -17,5 +17,5 @@ setup(
     author='Imp Alpha lab',
     author_email='hilalyamine@gmail.com',
     license=license,
-    packages=find_packages(exclude=('scripts', 'analysis'))
+    packages=find_packages(exclude=('scripts', 'analysis', 'api'))
 )

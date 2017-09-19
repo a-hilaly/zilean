@@ -1,7 +1,4 @@
 
-def authorize_adress_user(**kwargs):
-    pass
-
 
 def make_server_partition(**kwargs):
     pass

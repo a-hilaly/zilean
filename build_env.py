@@ -1,6 +1,7 @@
 import os
 import skmvs as SK
 
+#TODO: REDO
 ZP = os.getcwd()
 ZS = "{0}/scripts".format(ZP)
 ZV = "0.0.1"
