@@ -15,11 +15,11 @@ class ZileanMigrations(ZileanCache):
               "success"]
 
     @cachemove(__file__, ZileanMigrations)
-    def register_migration(self,
-                           db=None,
-                           backupfile=None,
-                           run_time=None,
-                           success=None):
+    def _register_migration(self,
+                            db=None,
+                            backupfile=None,
+                            run_time=None,
+                            success=None):
         M.add_element(self.db,
                       self.table,
                       database=db,
@@ -28,23 +28,30 @@ class ZileanMigrations(ZileanCache):
                       success=success)
 
     @classmethod
-    def _register_migration(cls, *args, **kwargs):
+    def register_migration(cls, *args, **kwargs):
         obj = object.__new__(cls)
         obj.__init__()
         obj.register_migration(*args, **kwargs)
 
+    @classmethod
+    def clear_cache(clear):
+        pass
 
+def _filter_kwargs(**kwargs):
+    pass
+
+#FIXME
 def cachemigration(func):
     def wrap_args(*args, **kwargs):
         t1 = time.time()
         try:
             res = func(*args, **kwargs)
             t2 = time.time()
-            ZileanMigrations._register_migration(**self._filter_kwargs(**kwargs),
-                                                 run_time=t2-t1,
-                                                 success=1)
+            ZileanMigrations.register_migration(**_filter_kwargs(**kwargs),
+                                                run_time=t2-t1,
+                                                success=1)
         except:
-            ZileanMigrations._register_migration(**self._filter_kwargs(**kwargs),
-                                                 run_time=t2-t1,
-                                                 success=0)
+            ZileanMigrations.register_migration(**_filter_kwargs(**kwargs),
+                                                run_time=t2-t1,
+                                                success=0)
     return wrap_args

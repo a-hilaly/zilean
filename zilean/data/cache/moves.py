@@ -17,15 +17,14 @@ class ZileanMoves(ZileanCache):
               "run_time",
               "success"]
 
-    @cachemove(__file__, ZileanMoves)
-    def register_move(self,
-                      module=None,
-                      _class=None,
-                      func=None,
-                      args=None,
-                      out_put=None,
-                      run_time=None,
-                      success=None):
+    def _register_move(self,
+                       module=None,
+                       _class=None,
+                       func=None,
+                       args=None,
+                       out_put=None,
+                       run_time=None,
+                       success=None):
 
         M.add_element(self.db,
                       self.table,
@@ -37,10 +36,15 @@ class ZileanMoves(ZileanCache):
                       success=success)
 
     @classmethod
-    def _register_move(cls, *args, **kwargs):
+    def register_move(cls, *args, **kwargs):
         obj = object.__new__(cls)
         obj.register_move(*args, **kwargs)
 
+    @classmethod
+    def clear_cache(clear):
+        pass
+
+#FIXME
 def cachemove(module=None, _class=None):
     """
     Decorator to zilean intern function except .zileancache

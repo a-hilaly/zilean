@@ -13,6 +13,55 @@ class ZileanUsers(BasicTable, WithGrantsOptions, WithLockOptions):
     fields = []
 
     # +/- User
+    def _create_user(self, user, host, password=_DEFAULT_PASSWORD):
+        """
+        Add User to mysql server configuration
+        """
+        pass
+
+    def _remove_user(self, use, host):
+        """
+        Remove User from mysql server configuration
+        """
+        pass
+
+    def _users_list(self, *args, filtered_by=['User', 'Host']):
+        """
+        Return list of users filtred by filtred_by + *args
+        """
+        pass
+
+    def _user_grants(self, user, host):
+        """
+        Return user Grants
+        """
+        pass
+
+    def _set_user_grants(self,
+                         user,
+                         host,
+                         grants=None,
+                         db=None,
+                         table=None):
+        """
+        Set user grants at db.table
+        """
+        pass
+
+    def _remove_user_grants(self,
+                            user,
+                            host,
+                            grants=None,
+                            db=None,
+                            table=None):
+        """
+        Remove user grants at db.table
+        """
+        pass
+
+    def _compare_users_to_registred_machines(self):
+        pass
+
 
     @classmethod
     def create_user(cls, user, host, password=_DEFAULT_PASSWORD):
@@ -67,5 +116,5 @@ class ZileanUsers(BasicTable, WithGrantsOptions, WithLockOptions):
         pass
 
     @classmethod
-    def _compare_users_to_registred_machines(cls):
+    def compare_users_to_registred_machines(cls):
         pass
