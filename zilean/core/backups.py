@@ -7,7 +7,7 @@ def mysqlcmd_readscript(script_path):
 
 def migrate_database_backup(database, script_path):
     a="{0} {1}"
-    execute_shell_command(_script.format("read", a.format(script_path)))
+    execute_shell_command(_script.format("read", a.format(script_path, database)))
 
 def create_database_backup(database, target):
     a="{0} {1}"

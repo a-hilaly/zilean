@@ -1,3 +1,5 @@
+from greww.data import MysqlPen as M
+
 class BasicTable(object):
     """
     Basic Table Modelisation Sample
@@ -14,7 +16,7 @@ class BasicTable(object):
         Initialise class instance with table content as data
         ====================================================
         """
-        self._data = dict(M.table_content(self.db, self.table))
+        self._data = M.table_content(self.db, self.table)
 
     def update(self):
         """
@@ -44,7 +46,7 @@ class BasicTable(object):
         return dict(zip(self.fields, line))
 
 
-class ZileanCache(object):
+class ZileanCache(BasicTable):
     """
     Zilean Cache Tables
     """

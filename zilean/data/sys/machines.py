@@ -1,8 +1,10 @@
 from greww.data import MysqlPen as M
-from greww.filters import refetch_filter
+from greww.utils.filters import refetch_filter
 from zilean.data.basics import ZileanCache
-from ._exceptions import MachineDataError
 from zilean.data.cache import zileanmoves
+
+class MachineDataError(Exception):
+    pass
 
 class MachinesData(ZileanSys):
 
@@ -16,13 +18,13 @@ class MachinesData(ZileanSys):
                   'extra',
                   'adress',
                   'type',
-                  'authorisation',
                   'front_database',
                   'other_databases',
+                  'authorisation',
                   'zilean_auto_backup']
 
         @refetch_filter([1])
-        @zileanmoves(__file__, MachinesData):
+        @zileanmoves(__file__, MachinesData)
         @property
         def machines(self):
             return self.data
@@ -32,7 +34,7 @@ class MachinesData(ZileanSys):
             for line in self._data.items():
                 if machine_id and line[0] == machine_id:
                     return True
-                elif machine_name and line[1] == machine_name
+                elif machine_name and line[1] == machine_name:
                     return True
                 elif alias and alias in line[3]:
                     return True
@@ -42,11 +44,11 @@ class MachinesData(ZileanSys):
         def machine_data(self, machine_name=None, machine_id=None, alias=None):
             for line in self._data.items():
                 if machine_id and line[0] == machine_id:
-                    return dict(zip(self.fields, line)
-                elif machine_name and line[1] == machine_name
-                    return dict(zip(self.fields, line)
+                    return dict(zip(self.fields, line))
+                elif machine_name and line[1] == machine_name:
+                    return dict(zip(self.fields, line))
                 elif alias and alias in line[3]:
-                    return dict(zip(self.fields, line)
+                    return dict(zip(self.fields, line))
             raise MachineDataError(machine_name, machine_id, alias)
 
         @zileanmoves(__file__, MachinesData)
