@@ -32,10 +32,10 @@ jobs:
           command: |
             bash build.sh --build
 
-      - run:
-          name: test pkg
-          command: |
-            python3 setup.py test
+      #- run:
+      #    name: test pkg
+      #    command: 
+      #      python3 setup.py test
 
       - store_artifacts:
           path: test-reports
