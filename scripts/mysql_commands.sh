@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source $ZILEAN_SQL/_mutils.sh
-
 # MYSQLCMD & MYSQLDUMP should be in shell env or sourced from machineenv.sh
 
 function mysql_read () {
@@ -14,7 +12,7 @@ function mysql_read () {
     fi
 }
 
-function mysql_dump_database {
+function mysql_backup_database {
     database=$1
     file=$2
     $MYSQLDUMPCMD --databases $database -u $z_user "-p$z_password" > $file

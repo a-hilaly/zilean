@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source $ZILEAN_SQL/_mysqltools.sh
-
 function make_zilean_mysql () {
   mysql_read $zilean_cache
   mysql_read $zilean_sys
