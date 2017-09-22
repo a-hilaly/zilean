@@ -1,14 +1,20 @@
 #!/bin/bash
 
 ZILEAN_PATH="$PWD"
-ZILEAN_SCRIPTS="$ZILEAN_PATH/zilean/_sql"
+ZILEAN_SCRIPTS="$ZILEAN_PATH/scripts"
+ZILEAN_API="$ZILEAN_PATH/api"
+ZILEAN_ANALYSIS="$ZILEAN_PATH/api"
 ZILEAN_VERSION="0.0.1"
-ZILEAN_CACHE="$ZILEAN_PATH/cache"
+ZILEAN_BUILD_ENV="$ZILEAN_PATH/build_env.py"
 export ZILEAN_PATH
-export ZILEAN_CACHE
 export ZILEAN_SCRIPTS
+export ZILEAN_API
+export ZILEAN_ANALYSIS
 export ZILEAN_VERSION
-#MACHINE_CONFIG = "$HOME/zilean-machine.ini"
+
+function make_skmvs_env () {
+    python3 $ZILEAN_BUILD_ENV
+}
 
 function expmk () {
     mkdir ZILEAN_CACHE
@@ -29,4 +35,15 @@ function test_py_lib () {
     python3 $s test
 }
 
-expmk
+command=$1
+option=$2
+
+if [ "$command" = "--build" ]; then
+
+elif [ "$command" = "--test" ]; then
+
+elif [ "$command" = "--run-server" ]; then
+
+elif [ "$command" = "--analyse" ]; then
+
+fi
