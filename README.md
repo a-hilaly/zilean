@@ -2,10 +2,9 @@
 mysql-server management : backups, security, partition, dev support
 
 
-| TravisCI | CircleCI | CodeClimate |
+| Master | Dev | Coverage |
 | --- | --- | --- |
-| [![Build Status](https://travis-ci.com/iallabs/zilean-machine.svg?token=qsqoiH3xhBi1WyATcy2m&branch=master)](https://travis-ci.com/iallabs/zilean-machine) | [![CircleCI](https://circleci.com/gh/iallabs/zilean-machine/tree/master.svg?style=svg&circle-token=f3d193e37ae25eb26cc445151abea74239fdc2a7)](https://circleci.com/gh/iallabs/zilean-machine/tree/master) | [![Test Coverage](https://codeclimate.com/repos/5991a9250700a8028a001041/badges/14fed1c90ba3b8067a4e/coverage.svg)](https://codeclimate.com/repos/5991a9250700a8028a001041/coverage) [![Issue Count](https://codeclimate.com/repos/5991a9250700a8028a001041/badges/14fed1c90ba3b8067a4e/issue_count.svg)](https://codeclimate.com/repos/5991a9250700a8028a001041/feed)
-
+| [![CircleCI](https://circleci.com/gh/iallabs/zilean/tree/master.svg?style=svg&circle-token=f3d193e37ae25eb26cc445151abea74239fdc2a7)](https://circleci.com/gh/iallabs/zilean/tree/master) | [![CircleCI](https://circleci.com/gh/iallabs/zilean/tree/zilean-dev.svg?style=svg&circle-token=f3d193e37ae25eb26cc445151abea74239fdc2a7)](https://circleci.com/gh/iallabs/zilean/tree/zilean-dev) | X |
 #
 
 
