@@ -35,7 +35,7 @@ jobs:
       - run:
           name: test pkg
           command: |
-            python setup.py test
+            python3 setup.py test
 
       - store_artifacts:
           path: test-reports
