@@ -4,7 +4,7 @@ mysql-server management : backups, security, partition, dev support
 
 | Master | Dev | Coverage |
 | --- | --- | --- |
-| [![CircleCI](https://circleci.com/gh/iallabs/zilean-machine/tree/master.svg?style=svg&circle-token=f3d193e37ae25eb26cc445151abea74239fdc2a7)](https://circleci.com/gh/iallabs/zilean-machine/tree/master) | [![CircleCI](https://circleci.com/gh/iallabs/zilean/tree/zilean-dev.svg?style=svg&circle-token=f3d193e37ae25eb26cc445151abea74239fdc2a7)](https://circleci.com/gh/iallabs/zilean/tree/zilean-dev) | X |
+| [![CircleCI](https://circleci.com/gh/iallabs/zilean/tree/master.svg?style=svg&circle-token=f3d193e37ae25eb26cc445151abea74239fdc2a7)](https://circleci.com/gh/iallabs/zilean/tree/master) | [![CircleCI](https://circleci.com/gh/iallabs/zilean/tree/zilean-dev.svg?style=svg&circle-token=f3d193e37ae25eb26cc445151abea74239fdc2a7)](https://circleci.com/gh/iallabs/zilean/tree/zilean-dev) | X |
 #
 
 
