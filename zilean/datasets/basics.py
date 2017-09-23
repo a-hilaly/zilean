@@ -1,4 +1,4 @@
-from greww.data import MysqlPen as M
+from greww.data.mysql import MysqlPen as M
 
 class BasicTable(object):
     """

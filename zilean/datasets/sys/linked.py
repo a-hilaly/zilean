@@ -1,67 +1,57 @@
 from greww.data import MysqlPen as M
-from zilean.data.basics import ZileanCache
-from zilean.data.cache import ZileanMoves
+from zilean.datasetts.basics import BasicTable
 
-class DatabaseDataError(Exception):
-    pass
-
-class ZLinkedDatabases(ZileanSys):
+class ZLinkedDatabases(BasicTable):
 
     __slots__ = ["data"]
 
     table = "zilean_linked_databases"
     fields = ['database_id',
               'database',
-              'local',
               'linked_time',
-              'last_backup_id']
+              'last_backup_id',
+              'last_backup_time']
 
-    @zileanmoves(__file__, LinkedDatabasesData)
-    def islinked(self, db):
-        for line in self._data:
+    @classmethod
+    def is_linked(cls, db):
+        obj = object.__new__(cls)
+        obj.__init__()
+        for line in obj._data:
             if line[1] == db:
                 return True
         return False
 
-    @zileanmoves(__file__, LinkedDatabasesData)
-    def database_data(self, db):
-        for line in self.data:
+    @classmethod
+    def all_linked(cls, filter_by=['database']):
+        return cls.DATA()
+
+
+    @classmethod
+    def linked_database_data(cls, db):
+        obj = object.__new__(cls)
+        obj.__init__()
+        for line in obj.data:
             if line[1] == db:
                 return line
         raise DatabaseDataError(db)
 
-    @zileanmoves(__file__, LinkedDatabasesData)
-    def link_database(self, db, local=True):
-        l = 1 if local else 0
-        M.add_element(self.db,
-                      self.table,
-                      database=db,
-                      local=l)
 
-    @zileanmoves(__file__, LinkedDatabasesData)
-    def delink_database(self, db):
-        M.remove_elements(self.db,
+    @classmethod
+    def link_database(cls, db):
+        M.add_element(cls.db,
+                      cls.table,
+                      database=db)
+
+    @classmethod
+    def delink_database(cls, db):
+        M.remove_elements(cls.db,
                           self.table,
                           where="database = '{0}'".format(db))
 
     @classmethod
-    def _islinked(cls, db):
-        obj = object.__new__(cls)
-        obj = obj.__init__()
-        return obj.islinked(db)
+    def database_last_n_backups(cls, db):
+        pass
 
     @classmethod
-    def _database_data(cls, db):
-        obj = object.__new__(cls)
-        obj = obj.__init__()
-        return obj.database_data(db)
-
-    @classmethod
-    def _link_database(cls, db, local=True):
-        obj = object.__new__(cls)
-        return obj.link_database(db, local=local)
-
-    @classmethod
-    def _delink_database(cls, db):
-        obj = object.__new__(cls)
-        return obj.link_database(db, local=local)
+    def register_database_backup(cls, backup_id, db=None, database_id=None):
+        pass
