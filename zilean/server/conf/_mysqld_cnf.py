@@ -1,8 +1,5 @@
 import os
-
-
-def _find_cnf_file():
-    pass
+from ._config import MYSQL_CNF_LOCATION
 
 class Cnf(object):
 
