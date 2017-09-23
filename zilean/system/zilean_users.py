@@ -1,5 +1,4 @@
-from zilean.datasets.sys.users import ZileanUsers, ZileanAdmin
-from zilean.datasets.sys.machines import ZileanMachines
+from zilean.datasets.sys.users import ZileanUsers
 from zilean._config import ZileanConfig as ZC
 
 class NotAllowedCreation(Exception):
@@ -17,68 +16,87 @@ class NotAllowedDelegation(Exception):
 class VoidArgs(Exception):
     pass
 
-def _manage_kwargs_1(grants=None, on_db=None, on_tb=None):
-    g = grants
-    d = on_db
-    t = on_tb
-    if grants == "*":
-        g = "ALL"
-    if not on_db:
-        d = "*"
-    if not on_tb:
-        t = "*"
-    return g, d, t
+class UserDoesntExist(Exception):
+    pass
+
+class UserExists(Exception):
+    pass
+
+class GrantsLocked(Exception):
+    pass
+
+users = ZileanUsers
 
 class ZileanUsers(object):
-
-    users = ZileanUsers
-    machines = MachinesData
-    admins = ZileanAdmin
 
     def __init__(self):
         for el, val in ZC.load(self.__class__.__name__).items():
             setattr(self, el, val)
 
-    @classmethod
-    def create_user(cls, user, host, password=None, grants=None, on_db=None, on_tb=None):
-        obj = object.__new__(cls)
-        obj.__init__()
-        #
+    def all_users(self, filter_by=None):
+        if filter_by is None:
+            return users.users_list()
+        return users.users_list(filter_by=filter_by)
+
+    def all_super(self, filter_by=None):
+        return users.superuser_list()
+
+    def all_machines():
+        pass
+
+    def _check_user(self, user, host):
         if not user or not host:
             raise VoidArgs()
-        if not 'C' in obj.users_allow:
-            raise NotAllowedCreation
+        if (user, host) in users.users_list():
+            return True
+        return False
+
+    def create_user(self, user, host, password=None, grants=None, on_db=None, on_tb=None):
+        if self._check_user(user, host):
+            raise UserExists()
+        if not 'C' in self.users_allows:
+            raise NotAllowedCreation()
         if password is None:
-            obj.users.create_user(user, host)
-        obj.users.create_user(user, host, password)
+            users.create_user(user, host)
+        else:
+            users.create_user(user, host, password)
         if grants:
-            g, d, t = _manage_kwargs_1(grants, on_db, on_tb)
-            obj.users.set_user_grants(user, host, g, d, t)
+            users.set_user_grants(user, host, grants, on_db, on_tb)
 
-    @classmethod
-    def user_grants(cls, user, host):
-        cls.users.user_grants(user, host)
+    def remove_user(self, user, host):
+        if not self._check_user(user, host):
+            raise UserDoesntExist()
+        if not 'X' in self.users_allows:
+            raise NotAllowedCreation()
+        users.remove_user(user, host)
 
-    @classmethod
-    def set_user_grants(cls, user, host):
+    def user_grants(self, user, host):
+        if not self._check_user(user, host):
+            raise UserDoesntExist()
+        return users.user_grants(user, host)
+
+    def set_user_grants(self, user, host, grants=None, on_db=None, on_tb=None):
+        if not self._check_user(user, host):
+            raise UserDoesntExist()
+        if self.lock_grants == 'true':
+            raise GrantsLocked()
+        users.set_user_grants(user, host, grants, on_db, on_tb)
+
+    def revoke_user_grants(self, user, host, grants=None, on_db=None, on_tb=None):
+        if not self._check_user(user, host):
+            raise UserDoesntExist()
+        if self.lock_grants == 'true':
+            raise GrantsLocked()
+        users.revoke_user_grants(user, host, grants, on_db, on_tb)
+
+    def create_machine(self, as_superuser=False):
         pass
 
-    @classmethod
-    def remove_user(cls, user, host):
-        cls.users.remove_user(user, host)
-
-    @classmethod
-    def create_machine(cls, as_admin=False):
+    def delete_machine(self, machine_id=None, machine_name=None, alias=None, adress=None):
         pass
 
-    @classmethod
-    def delete_machine(cls, machine_id=None, machine_name=None, alias=None, adress=None):
-        pass
+    def create_super_user(self, user, host, password=None):
+        self.create_user(user, host, password, grants='*')
 
-    @classmethod
-    def create_admin(cls, user, host, password=None, grants='*'):
-        cls.create_user(user, host, password, grants)
-
-    @classmethod
-    def remove_admin(cls, user, host):
-        cls.users.remove_user(cls, user, host)
+    def remove_super_user(self, user, host):
+        self.remove_user(user, host)
