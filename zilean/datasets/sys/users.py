@@ -12,17 +12,20 @@ class ZileanUsers(BasicTable, WithGrantsOptions, WithLockOptions):
     table = "user"
     fields = []
 
+    def __init__(self):
+        BasicTable.__init__(self)
+
     # +/- User
 
-    @classmethod
-    def create_user(cls, user, host, password=_DEFAULT_PASSWORD):
+    @staticmethod
+    def create_user(user, host, password=_DEFAULT_PASSWORD):
         """
         Add User to mysql server configuration
         """
         pass
 
-    @classmethod
-    def remove_user(cls, use, host):
+    @staticmethod
+    def remove_user(use, host):
         """
         Remove User from mysql server configuration
         """
@@ -35,16 +38,15 @@ class ZileanUsers(BasicTable, WithGrantsOptions, WithLockOptions):
         """
         pass
 
-    @classmethod
-    def user_grants(cls, user, host):
+    @staticmethod
+    def user_grants(user, host):
         """
         Return user Grants
         """
         pass
 
-    @classmethod
-    def set_user_grants(cls
-                        user,
+    @staticmethod
+    def set_user_grants(user,
                         host,
                         grants=None,
                         db=None,
@@ -54,7 +56,7 @@ class ZileanUsers(BasicTable, WithGrantsOptions, WithLockOptions):
         """
         pass
 
-    @classmethod
+    @staticmethod
     def remove_user_grants(cls,
                            user,
                            host,
@@ -68,4 +70,19 @@ class ZileanUsers(BasicTable, WithGrantsOptions, WithLockOptions):
 
     @classmethod
     def _compare_users_to_registred_machines(cls):
+        pass
+
+
+class ZileanAdmins(ZileanUsers):
+
+    @classmethod
+    def create_admin(cls, *args, **kwargs):
+        pass
+
+    @classmethod
+    def admins_list(cls):
+        pass
+
+    @classmethod
+    def remove_admin(cls):
         pass

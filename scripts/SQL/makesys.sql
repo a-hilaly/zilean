@@ -8,19 +8,6 @@ CREATE DATABASE zileansystem;
 
 USE zileansystem;
 
-CREATE TABLE `zilean_service` (
-  `service` VARCHAR(30) NOT NULL,
-  `status` BOOLEAN NOT NULL DEFAULT 0,
-  PRIMARY KEY (`service`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `zilean_serve`
-  (`service`)
-VALUES
-  ('db_backup'),
-  ('safety_switch'),
-  ('mysql_security');
-
 CREATE TABLE `zilean_registred_machines` (
   `machine_id` INT(5) NOT NULL AUTO_INCREMENT,
   `machine_name` VARCHAR(30) NOT NULL,

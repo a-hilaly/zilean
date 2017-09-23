@@ -8,12 +8,14 @@ ZILEAN_ANALYSIS="$ZILEAN_PATH/api"
 ZILEAN_OFFICE="$ZILEAN_PATH/office"
 ZILEAN_VERSION="0.0.1"
 ZILEAN_BUILD_ENV="$ZILEAN_PATH/build_env.py"
+ZILEAN_CONFIG="$ZILEAN_PATH/pkg/config/zilean.cfg"
 export ZILEAN_PATH
 export ZILEAN_SCRIPTS
 export ZILEAN_API
 export ZILEAN_ANALYSIS
 export ZILEAN_VERSION
 export ZILEAN_OFFICE
+export ZILEAN_CONFIG
 
 function make_requirements () {
     python3 $ZILEAN_BUILD_ENV --make $ZILEAN_PATH

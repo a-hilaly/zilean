@@ -1,4 +1,5 @@
 import os
+from ._config import MYSQL_CMD_LOCATION
 
 class Service(object):
 

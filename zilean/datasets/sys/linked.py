@@ -5,7 +5,7 @@ from zilean.data.cache import ZileanMoves
 class DatabaseDataError(Exception):
     pass
 
-class LinkedDatabasesData(ZileanSys):
+class ZLinkedDatabases(ZileanSys):
 
     __slots__ = ["data"]
 
