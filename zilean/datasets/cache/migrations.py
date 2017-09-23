@@ -33,7 +33,6 @@ class ZileanMigrations(ZileanCache):
         obj.__init__()
         obj.register_migration(*args, **kwargs)
 
-
 def cachemigration(func):
     def wrap_args(*args, **kwargs):
         t1 = time.time()

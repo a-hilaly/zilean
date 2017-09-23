@@ -1,5 +1,5 @@
 from greww.data.config import option_data, configuration_data
-from .envs import ZILEAN_CONFIG
+from ._envs import ZILEAN_CONFIG
 
 
 class ZileanConfig(object):

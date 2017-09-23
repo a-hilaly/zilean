@@ -12,6 +12,7 @@ ZILEAN_CONFIG="$ZILEAN_PATH/pkg/config/zilean.cfg"
 export ZILEAN_PATH
 export ZILEAN_SCRIPTS
 export ZILEAN_API
+export ZILEAN_VERSION
 export ZILEAN_ANALYSIS
 export ZILEAN_VERSION
 export ZILEAN_OFFICE
@@ -49,6 +50,8 @@ option=$2
 
 if [ "$command" = "--build" ]; then
     build_py_lib
+elif [ "$command" = "--build-env" ]; then
+    build_env
 elif [ "$command" = "--make-req" ]; then
     echo "not implemented"
 elif [ "$command" = "--test" ]; then

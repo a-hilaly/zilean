@@ -1,35 +1,44 @@
 from greww.data import MysqlPen as M
 from greww.utils.filters import refetch_filter
-from zilean.data.basics import ZileanCache
-from zilean.data.cache import zileanmoves
+from zilean.datasets.basics import BasicTable
 
 class MachineDataError(Exception):
     pass
 
-class ZileanMachines(ZileanSys):
+class MachineExists(Exception):
+    pass
+
+class MachineDoesntExist(Exception):
+    pass
+
+class ZileanMachines(BasicTable):
 
         __slots__ = ["_data"]
 
         table = "zilean_registred_machines"
         fields = ['machine_id',
                   'machine_name',
+                  'host',
                   'owner',
                   'alias',
                   'extra',
-                  'adress',
                   'type',
                   'front_database',
                   'other_databases',
-                  'authorisation',
                   'zilean_auto_backup']
 
         @refetch_filter([1])
-        def machines(self):
-            return self.data
+        @classmethod
+        def machines_list(cls):
+            obj = object.__new__(cls)
+            obj.__init__()
+            return obj.data
 
-        @zileanmoves(__file__, MachinesData)
-        def isregistred(self, machine_name=None, machine_id=None, alias=None):
-            for line in self._data.items():
+        @classmethod
+        def isregistred(cls, machine_name=None, machine_id=None):
+            obj = object.__new__(cls)
+            obj.__init__()
+            for line in obj._data:
                 if machine_id and line[0] == machine_id:
                     return True
                 elif machine_name and line[1] == machine_name:
@@ -38,77 +47,57 @@ class ZileanMachines(ZileanSys):
                     return True
             return False
 
-        @zileanmoves(__file__, MachinesData)
-        def machine_data(self, machine_name=None, machine_id=None, alias=None):
-            for line in self._data.items():
+        @classmethod
+        def machine_data(cls, machine_name=None, machine_id=None):
+            obj = object.__new__(cls)
+            obj.__init__()
+            for line in obj._data:
                 if machine_id and line[0] == machine_id:
-                    return dict(zip(self.fields, line))
+                    return dict(zip(cls.fields, line))
                 elif machine_name and line[1] == machine_name:
-                    return dict(zip(self.fields, line))
+                    return dict(zip(cls.fields, line))
                 elif alias and alias in line[3]:
-                    return dict(zip(self.fields, line))
+                    return dict(zip(cls.fields, line))
             raise MachineDataError(machine_name, machine_id, alias)
 
-        @zileanmoves(__file__, MachinesData)
-        def new_machine(self, **kwargs):
-            M.add_element(self.db,
-                          self.table,
+        @classmethod
+        def new_machine(cls, **kwargs):
+            M.add_element(cls.db,
+                          cls.table,
                           **kwargs)
 
-        @zileanmoves(__file__, MachinesData)
-        def delete_machine(self, machine_name=None, machine_id=None):
+        @classmethod
+        def delete_machine(cls, machine_name=None, machine_id=None):
             if machine_id:
-                M.remove_elements(self.db,
-                                  self.table,
+                M.remove_elements(cls.db,
+                                  cls.table,
                                   where="machine_id = {0}".format(machine_id))
             if machine_name:
-                M.remove_elements(self.db,
-                                  self.table,
+                M.remove_elements(cls.db,
+                                  cls.table,
                                   where="machine_name = '{0}".format(machine_name))
-            self.upgrade
 
-        @zileanmoves(__file__, MachinesData)
-        def set_machine_data(self, machine_name=None, machine_id=None, config=None, value=None):
+        @classmethod
+        def set_machine_data(cls, machine_name=None, machine_id=None, config=None, value=None):
             if machine_name:
-                M.update_element(self.db,
-                                 self.table,
+                M.update_element(cls.db,
+                                 cls.table,
                                  where="machine_name = '{0}".format(machine_name),
-                                 sets="{0} = {1}")
+                                 sets="{0} = {1}".format(config, value))
             if machine_id:
-                M.update_element(self.db,
-                                 self.table,
+                M.update_element(cls.db,
+                                 cls.table,
                                  where="machine_id = '{0}".format(machine_id),
-                                 sets="{0} = {1}")
+                                 sets="{0} = {1}".format(config, value))
 
         @classmethod
-        def _machines(cls):
-            obj = object.__new__(cls)
-            obj.__init__()
-            return obj.machines
+        def add_machine_database(cls):
+            pass
 
         @classmethod
-        def _is_registered_machine(cls, **kwargs):
-            obj = object.__new__(cls)
-            obj.__init__()
-            return obj.isregistred(**kwargs)
+        def remove_machine_database(cls):
+            pass
 
         @classmethod
-        def _machine_data(cls, **kwargs):
-            obj = object.__new__(cls)
-            obj.__init__()
-            return obj.machine(**kwargs)
-
-        @classmethod
-        def _new_machine(cls, **kwargs):
-            obj = object.__new__(cls)
-            obj.new_machine(**kwargs)
-
-        @classmethod
-        def _delete_machine(self, **kwargs):
-            obj = object.__new__(cls)
-            obj.delete_machine(**kwargs)
-
-        @classmethod
-        def _set_machine_data(cls, **kwargs):
-            obj = object.__new__(cls)
-            obj.set_machine_data(**kwargs)
+        def make_mysql_config_conf():
+            pass

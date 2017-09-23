@@ -1,8 +1,9 @@
-#from zilean.core._envs import zilean_pkg_config
-from zilean.data.basics import BasicTable
+from greww.data.mysql import MysqlPen as M
+from zilean.datasets.basics import BasicTable
 from .security import WithGrantsOptions, WithLockOptions
 #
 ADD_USER = "CREATE USER '{0}'@'{1}' IDENTIFIED BY '{2}';"
+DROP_USER = "DROP USER '{0}'@'{1}';"
 
 _DEFAULT_PASSWORD = "1" #zilean_pkg_config("DEFAULT", "default_password")
 
@@ -16,73 +17,46 @@ class ZileanUsers(BasicTable, WithGrantsOptions, WithLockOptions):
         BasicTable.__init__(self)
 
     # +/- User
-
     @staticmethod
     def create_user(user, host, password=_DEFAULT_PASSWORD):
         """
         Add User to mysql server configuration
         """
-        pass
+        M.execute(ADD_USER.format(user, host, password))
 
     @staticmethod
-    def remove_user(use, host):
+    def remove_user(user, host):
         """
         Remove User from mysql server configuration
         """
-        pass
+        M.execute(DROP_USER.format(user, host))
 
     @classmethod
-    def users_list(cls, *args, filtered_by=['User', 'Host']):
+    def users_list(cls, filter_by=['User', 'Host']):
         """
         Return list of users filtred by filtred_by + *args
         """
-        pass
+        from greww.utils.str_bin import convert_bin_to_str
 
-    @staticmethod
-    def user_grants(user, host):
-        """
-        Return user Grants
-        """
-        pass
+        s = filter_by[0]
+        for _ in filter_by[1::]:
+            s = "{0}, {1}".format(s, _)
+        res = M.select_elements(cls.db,
+                                cls.table,
+                                selection=s)
+        _res = []
+        _t = []
+        for elements in res:
+            _t = ()
+            for i in elements:
+                _t += (convert_bin_to_str(i),)
+            _res += [_t]
+        return _res
 
-    @staticmethod
-    def set_user_grants(user,
-                        host,
-                        grants=None,
-                        db=None,
-                        table=None):
-        """
-        Set user grants at db.table
-        """
-        pass
-
-    @staticmethod
-    def remove_user_grants(cls,
-                           user,
-                           host,
-                           grants=None,
-                           db=None,
-                           table=None):
-        """
-        Remove user grants at db.table
-        """
-        pass
+    # grants
 
     @classmethod
     def _compare_users_to_registred_machines(cls):
-        pass
-
-
-class ZileanAdmins(ZileanUsers):
-
-    @classmethod
-    def create_admin(cls, *args, **kwargs):
-        pass
-
-    @classmethod
-    def admins_list(cls):
-        pass
-
-    @classmethod
-    def remove_admin(cls):
-        pass
+        """
+        """
+        raise NotImplemented()

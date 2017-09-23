@@ -10,11 +10,10 @@ USE zileansystem;
 
 CREATE TABLE `zilean_registred_machines` (
   `machine_id` INT(5) NOT NULL AUTO_INCREMENT,
-  `machine_name` VARCHAR(30) NOT NULL,
-  `owner` VARCHAR(30) DEFAULT "NaN",
-  `alias` JSON DEFAULT '[]',
+  `machine_name` VARCHAR(50) NOT NULL,
+  `host` VARCHAR(50) NOT NULL DEFAULT '__local__',
+  `owner` VARCHAR(50) DEFAULT "NaN",
   `extra` JSON DEFAULT '{}',
-  `adress` VARCHAR(30) NOT NULL DEFAULT '__local__',
   `type` enum(
                 'intern',
                 'local',
@@ -23,8 +22,7 @@ CREATE TABLE `zilean_registred_machines` (
                 'unknown'
               ) DEFAULT 'unknown',
   `front_database` VARCHAR(30) NOT NULL,
-  `other_databases` JSON,
-  `authorisation` VARCHAR(30) DEFAULT "UNDEFINED",
+  `other_databases` JSON DEFAULT '[]',
   `zilean_auto_backup` BOOLEAN NOT NULL DEFAULT 0,
   PRIMARY KEY (`machine_name`)
 )
@@ -36,7 +34,8 @@ CREATE TABLE `zilean_linked_databases` (
   `database` VARCHAR(25) NOT NULL,
   `local` BOOLEAN NOT NULL DEFAULT 0,
   `linked_time` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `last_backup_id` VARCHAR(30) DEFAULT 'none',
+  `last_backup_id` VARCHAR(30) DEFAULT 'NaN',
+  `last_backup_time` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`database`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
