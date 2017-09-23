@@ -6,7 +6,7 @@ from zilean.data.cache import zileanmoves
 class MachineDataError(Exception):
     pass
 
-class MachinesData(ZileanSys):
+class ZileanMachines(ZileanSys):
 
         __slots__ = ["_data"]
 
@@ -24,8 +24,6 @@ class MachinesData(ZileanSys):
                   'zilean_auto_backup']
 
         @refetch_filter([1])
-        @zileanmoves(__file__, MachinesData)
-        @property
         def machines(self):
             return self.data
 
@@ -89,7 +87,7 @@ class MachinesData(ZileanSys):
             return obj.machines
 
         @classmethod
-        def _isregistered(cls, **kwargs):
+        def _is_registered_machine(cls, **kwargs):
             obj = object.__new__(cls)
             obj.__init__()
             return obj.isregistred(**kwargs)
