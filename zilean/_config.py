@@ -1,4 +1,5 @@
 from greww.data.config import option_data, configuration_data
+from greww._config import GrewwConfig, Configuration
 from ._envs import ZILEAN_CONFIG
 
 
