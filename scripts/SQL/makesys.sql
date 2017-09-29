@@ -33,7 +33,7 @@ CREATE TABLE `zilean_linked_databases` (
   `database_id` INT(5) NOT NULL AUTO_INCREMENT,
   `database` VARCHAR(25) NOT NULL,
   `local` BOOLEAN NOT NULL DEFAULT 0,
-  `linked_time` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `linked_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `last_backup_id` VARCHAR(30) DEFAULT 'NaN',
   `last_backup_time` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`database`)
